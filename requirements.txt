@@ -1,5 +1,5 @@
 streamlit
-requests
-beautifulsoup4
-wordcloud
+pandas
 matplotlib
+wordcloud
+fpdf
