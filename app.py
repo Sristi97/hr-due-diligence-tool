@@ -1,99 +1,130 @@
-# app.py
 import os
-import streamlit as st
 import requests
+from bs4 import BeautifulSoup
+import streamlit as st
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
-from textblob import TextBlob
+from collections import Counter
+import re
 
-st.set_page_config(page_title="HR Due Diligence Tool", layout="centered")
-
-# Fetch API key from CloudStream Secrets
-NEWS_API_KEY = os.environ.get("NEWSDATA_API_KEY")
-
-if not NEWS_API_KEY:
+# ====== CONFIG ======
+API_KEY = os.getenv("NEWSDATA_API_KEY")
+if not API_KEY:
     st.error("API key not set! Please add it in CloudStream Secrets.")
     st.stop()
 
-st.title("HR Due Diligence Tool")
-st.write("Fetch news, culture, reputation, and insights about companies for HR due diligence.")
+NEWS_BASE_URL = "https://newsdata.io/api/1/news"
+GOOGLE_SEARCH_URL = "https://www.google.com/search?q="
 
-company_name = st.text_input("Enter Company Name", "")
-
-def fetch_news(company):
-    url = "https://newsdata.io/api/1/news"
-    params = {
-        "apikey": NEWS_API_KEY,
-        "q": company,
-        "language": "en"
-    }
+# ====== HELPER FUNCTIONS ======
+def fetch_news(company_name, max_results=5):
+    """Fetch news articles about the company from NewsData.io"""
+    params = {"apikey": API_KEY, "q": company_name, "language": "en", "page": 1}
     try:
-        response = requests.get(url, params=params, timeout=10)
-        response.raise_for_status()
+        response = requests.get(NEWS_BASE_URL, params=params, timeout=10)
         data = response.json()
-        if "results" in data and data["results"]:
-            return [{"title": r.get("title"), "link": r.get("link"), "pubDate": r.get("pubDate"), "description": r.get("description")} for r in data["results"]]
-        else:
-            return []
+        if data.get("status") != "success":
+            return {"error": "API returned non-success status", "data": data}
+        articles = data.get("results", [])[:max_results]
+        if not articles:
+            return {"message": f"No news found for '{company_name}'"}
+        return [
+            {"title": a.get("title"), "link": a.get("link"),
+             "pubDate": a.get("pubDate"), "source": a.get("source_id")}
+            for a in articles
+        ]
     except Exception as e:
-        st.warning(f"Error fetching news: {e}")
-        return []
+        return {"error": str(e)}
 
-def fetch_google_snippets(company):
-    # Placeholder: replace with real API if available
-    return [{"snippet": f"No snippet data available for {company}"}]
+def fetch_google_snippets(company_name, max_results=5):
+    """Scrape top Google search snippets for the company"""
+    headers = {"User-Agent": "Mozilla/5.0"}
+    try:
+        response = requests.get(GOOGLE_SEARCH_URL + company_name, headers=headers, timeout=10)
+        soup = BeautifulSoup(response.text, "html.parser")
+        snippets = []
+        for g in soup.find_all('div', class_='tF2Cxc')[:max_results]:
+            title_tag = g.find('h3')
+            link_tag = g.find('a')
+            snippet_tag = g.find('span', class_='aCOpRe')
+            if title_tag and link_tag and snippet_tag:
+                snippets.append({
+                    "title": title_tag.get_text(),
+                    "link": link_tag['href'],
+                    "snippet": snippet_tag.get_text()
+                })
+        if not snippets:
+            return {"message": f"No Google snippets found for '{company_name}'"}
+        return snippets
+    except Exception as e:
+        return {"error": str(e)}
 
-def analyze_sentiment(news_list):
-    # Simple sentiment: +1 positive, -1 negative based on title/description
-    score = 0
-    text_corpus = ""
-    for item in news_list:
-        content = (item.get("title") or "") + " " + (item.get("description") or "")
-        text_corpus += " " + content
-        polarity = TextBlob(content).sentiment.polarity
-        if polarity > 0.1:
-            score += 1
-        elif polarity < -0.1:
-            score -= 1
-    # Normalize score to 0-100 scale
-    max_score = len(news_list) if news_list else 1
-    reputation = int((score + max_score) / (2 * max_score) * 100)
-    return reputation, text_corpus
+def fetch_company_reputation(company_name):
+    """Basic reputation check via Google search keywords"""
+    keywords = ["reviews", "employee satisfaction", "ratings", "Glassdoor"]
+    reputation_info = {}
+    for kw in keywords:
+        snippets = fetch_google_snippets(f"{company_name} {kw}", max_results=3)
+        reputation_info[kw] = snippets
+    return reputation_info
+
+def extract_text_for_wordcloud(news, snippets):
+    """Combine news titles and Google snippets to generate text for word cloud"""
+    text_parts = []
+    if isinstance(news, list):
+        text_parts.extend([a["title"] for a in news if "title" in a])
+    if isinstance(snippets, list):
+        text_parts.extend([s["snippet"] for s in snippets if "snippet" in s])
+    combined_text = " ".join(text_parts)
+    # Clean text
+    combined_text = re.sub(r'[^A-Za-z\s]', '', combined_text)
+    return combined_text
 
 def generate_wordcloud(text):
+    """Generate a WordCloud object from text"""
     if not text.strip():
         return None
-    wc = WordCloud(width=800, height=400, background_color="white").generate(text)
-    return wc
+    wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
+    return wordcloud
 
-if company_name:
-    st.subheader(f"Fetching info for {company_name}...")
+# ====== STREAMLIT UI ======
+st.set_page_config(page_title="HR Due Diligence Tool", layout="wide")
+st.title("HR Due Diligence Dashboard")
+st.markdown(
+    "Enter the company name to fetch news, Google snippets, reputation info, and a word cloud for culture analysis."
+)
 
-    news_results = fetch_news(company_name)
-    google_results = fetch_google_snippets(company_name)
+company_input = st.text_input("Company Name", "")
+
+if st.button("Fetch Data") and company_input.strip():
+    with st.spinner(f"Fetching data for {company_input}..."):
+        news = fetch_news(company_input.strip())
+        google_snippets = fetch_google_snippets(company_input.strip())
+        reputation = fetch_company_reputation(company_input.strip())
+        
+        # Generate word cloud
+        text_for_wc = extract_text_for_wordcloud(news if isinstance(news, list) else [], 
+                                                 google_snippets if isinstance(google_snippets, list) else [])
+        wordcloud = generate_wordcloud(text_for_wc)
     
-    reputation, corpus = analyze_sentiment(news_results)
-    wordcloud_img = generate_wordcloud(corpus)
-
-    # JSON result
-    results = {
-        "company": company_name,
-        "news": news_results,
-        "google_snippets": google_results,
-        "reputation_score": reputation
-    }
-
-    st.json(results)
-
-    # Display Word Cloud
-    if wordcloud_img:
-        st.subheader("Word Cloud from news")
-        plt.figure(figsize=(10,5))
-        plt.imshow(wordcloud_img, interpolation='bilinear')
-        plt.axis("off")
-        st.pyplot(plt)
-
-    if not news_results:
-        st.info("No news articles found.")
-    if not google_results or google_results == [{"snippet": f"No snippet data available for {company_name}"}]:
-        st.info("No Google snippet info available.")
+    # JSON output
+    st.subheader("Raw JSON Data")
+    st.json({
+        "company": company_input.strip(),
+        "news": news,
+        "google_snippets": google_snippets,
+        "reputation": reputation
+    })
+    
+    # Word Cloud output
+    st.subheader("Culture / Sentiment Word Cloud")
+    if wordcloud:
+        fig, ax = plt.subplots(figsize=(10, 5))
+        ax.imshow(wordcloud, interpolation='bilinear')
+        ax.axis("off")
+        st.pyplot(fig)
+    else:
+        st.info("No text available for word cloud.")
+        
+elif company_input.strip() == "":
+    st.info("Please enter a company name to fetch data.")
