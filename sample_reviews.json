@@ -1,17 +1,11 @@
-{
-  "TCS": [
-    "Great work-life balance and supportive management.",
-    "Lots of opportunities to learn new technologies.",
-    "Salary could be better, but overall good experience."
-  ],
-  "Infosys": [
-    "Good training programs for new employees.",
-    "Management is helpful, but growth is slow.",
-    "Work-life balance is decent."
-  ],
-  "Wipro": [
-    "Collaborative culture and friendly colleagues.",
-    "Sometimes tight deadlines, but manageable.",
-    "Good exposure to international clients."
-  ]
-}
+company_name = st.text_input("Enter company name:")
+
+if company_name:
+    st.subheader("Wikipedia Overview")
+    wiki_summary = fetch_wiki_summary(company_name)
+    st.write(wiki_summary)
+    
+    st.subheader("Recent News Headlines")
+    news_headlines = fetch_news(company_name)
+    for idx, headline in enumerate(news_headlines, 1):
+        st.write(f"{idx}. {headline}")
