@@ -41,30 +41,4 @@ def generate_wordcloud(text):
     return wordcloud
 
 def analyze_sentiment(texts):
-    """Simple sentiment polarity analysis using TextBlob"""
-    if not texts:
-        return "Not enough data"
-    polarity = sum(TextBlob(t).sentiment.polarity for t in texts) / len(texts)
-    if polarity > 0.1:
-        return "Overall Positive Sentiment 😊"
-    elif polarity < -0.1:
-        return "Overall Negative Sentiment 😟"
-    else:
-        return "Mixed/Neutral Sentiment 😐"
-
-def create_pdf(company, news, culture, sentiment):
-    """Generate PDF report and return as BytesIO"""
-    buffer = BytesIO()
-    c = canvas.Canvas(buffer, pagesize=letter)
-    width, height = letter
-
-    # Title
-    c.setFont("Helvetica-Bold", 16)
-    c.drawString(50, height - 50, f"HR Due Diligence Report: {company}")
-
-    y = height - 100
-    c.setFont("Helvetica-Bold", 12)
-    c.drawString(50, y, "📈 Sentiment Summary:")
-    y -= 20
-    c.setFont("Helvetica", 11)
-    c.drawString(60,
+    """Simple sentiment polarity analysis
