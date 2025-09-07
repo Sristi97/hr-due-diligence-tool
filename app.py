@@ -1,26 +1,30 @@
-# app.py
 import streamlit as st
 import random
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
+import pandas as pd
 
 # ---------------------------
 # Dummy Data Generators
 # ---------------------------
 
 def generate_summary(company):
-    strengths = ["supportive management", "flexible work hours", "innovative culture", "strong training programs", "team collaboration"]
-    weaknesses = ["slow decision-making", "limited recognition", "high workload", "training gaps", "internal politics"]
+    strengths = ["supportive management", "flexible work hours", "innovative culture", "strong training programs", "team collaboration", "diverse teams"]
+    weaknesses = ["slow decision-making", "limited recognition", "high workload", "training gaps", "internal politics", "inconsistent policies"]
+    culture_aspects = ["team collaboration", "innovation-driven environment", "continuous learning", "employee engagement programs"]
+    
     summary = (
-        f"{company} has strengths in {random.choice(strengths)} and {random.choice(strengths)}. "
-        f"Areas of improvement include {random.choice(weaknesses)} and {random.choice(weaknesses)}. "
-        f"Overall, the employee sentiment is {'positive' if random.random() > 0.3 else 'mixed'}."
+        f"{company} has several strengths including {random.choice(strengths)} and {random.choice(strengths)}. "
+        f"The company culture emphasizes {random.choice(culture_aspects)}. "
+        f"Areas for improvement include {random.choice(weaknesses)} and {random.choice(weaknesses)}. "
+        f"Employee sentiment appears {'generally positive' if random.random() > 0.3 else 'mixed'}, with feedback highlighting both achievements and challenges. "
+        f"Overall, {company} presents an environment where employees experience growth opportunities while facing some operational challenges."
     )
     return summary
 
 def generate_metrics():
     return {
-        "Employee Count": random.randint(200, 5000),
+        "Number of Reviews": random.randint(50, 500),
         "Attrition %": round(random.uniform(5, 25), 1),
         "Average Tenure (yrs)": round(random.uniform(1, 10), 1),
         "Satisfaction %": random.randint(60, 95),
@@ -33,22 +37,25 @@ def generate_feedback():
         "Opportunities to learn",
         "Good work-life balance",
         "Flexible hours",
-        "Strong leadership"
+        "Strong leadership",
+        "Mentorship programs",
+        "Inclusive environment"
     ]
     negative_feedback = [
         "High workload pressure",
         "Limited recognition",
         "Slow decision-making",
         "Training gaps",
-        "Internal politics"
+        "Internal politics",
+        "Inconsistent policies",
+        "Promotion delays"
     ]
-    # Random selection
-    pos = random.sample(positive_feedback, k=3)
-    neg = random.sample(negative_feedback, k=3)
+    pos = random.sample(positive_feedback, k=4)
+    neg = random.sample(negative_feedback, k=4)
     return pos, neg
 
 def generate_culture_keywords():
-    keywords = ["Innovation", "Collaboration", "Integrity", "Learning", "Accountability", "Diversity", "Empathy", "Agility"]
+    keywords = ["Innovation", "Collaboration", "Integrity", "Learning", "Accountability", "Diversity", "Empathy", "Agility", "Trust", "Communication"]
     word_freq = {k: random.randint(5,20) for k in random.sample(keywords, k=len(keywords))}
     return word_freq
 
@@ -58,19 +65,19 @@ def generate_highlights():
         "Training programs are improving but still limited in reach.",
         "Management is supportive but decision-making can be slow.",
         "Work-life balance is rated highly among teams.",
-        "Recognition programs are not consistent across departments."
+        "Recognition programs are not consistent across departments.",
+        "Innovation is encouraged but execution is sometimes delayed.",
+        "Team engagement initiatives are increasing employee satisfaction."
     ]
-    return random.sample(highlights, k=3)
+    return random.sample(highlights, k=4)
 
 # ---------------------------
 # Streamlit Layout
 # ---------------------------
 
 st.set_page_config(page_title="HR Due Diligence Dashboard", layout="wide")
-
 st.title("HR Due Diligence Dashboard")
 
-# Company Input
 company = st.text_input("Enter Company Name", value="").strip()
 
 if company:
@@ -85,18 +92,12 @@ if company:
     st.subheader("Executive Summary")
     st.write(summary)
     
-    # Metrics in 3 columns
+    # Key Metrics Table
     st.subheader("Key HR Metrics")
-    col1, col2, col3 = st.columns(3)
-    col1.metric("Employee Count", metrics["Employee Count"])
-    col1.metric("Attrition %", f"{metrics['Attrition %']}%")
+    metrics_df = pd.DataFrame(metrics.items(), columns=["Metric", "Value"])
+    st.table(metrics_df)
     
-    col2.metric("Average Tenure", f"{metrics['Average Tenure (yrs)']} yrs")
-    col2.metric("Satisfaction %", f"{metrics['Satisfaction %']}%")
-    
-    col3.metric("Overall Rating", metrics["Overall Rating"])
-    
-    # Employee Feedback
+    # Employee Feedback in two columns
     st.subheader("Employee Feedback")
     fb_col1, fb_col2 = st.columns(2)
     fb_col1.markdown("**Positive Feedback**")
@@ -106,12 +107,20 @@ if company:
     for f in neg_feedback:
         fb_col2.markdown(f"- {f}")
     
+    # Feedback Bar Chart
+    st.subheader("Feedback Overview")
+    feedback_counts = pd.DataFrame({
+        "Type": ["Positive", "Negative"],
+        "Count": [len(pos_feedback), len(neg_feedback)]
+    })
+    st.bar_chart(feedback_counts.set_index("Type"))
+    
     # Highlights
     st.subheader("Key Insights / Highlights")
     for h in highlights:
         st.markdown(f"- {h}")
     
-    # Culture / Word Cloud
+    # Culture / Word Cloud at the bottom
     st.subheader("Culture & Sentiment")
     fig, ax = plt.subplots(figsize=(10,4))
     wc = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(culture_keywords)
