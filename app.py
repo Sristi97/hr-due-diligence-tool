@@ -3,6 +3,8 @@ import random
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import pandas as pd
+from fpdf import FPDF
+from io import BytesIO
 
 # ---------------------------
 # Dummy Data Generators
@@ -99,9 +101,31 @@ def generate_fake_reviews(company):
         f"{company} has a collaborative and innovative culture.",
         f"Internal politics and promotion delays are sometimes reported."
     ]
-    for source in sources:
-        reviews.append({"Source": source, "Snippet": random.choice(sample_text)})
+    for _ in range(5):  # 5–6 review snippets
+        source = random.choice(sources)
+        sentiment = random.choice(["Positive", "Negative"])
+        snippet = random.choice(sample_text)
+        reviews.append({"Source": source, "Sentiment": sentiment, "Snippet": snippet})
     return reviews
+
+def generate_insights(metrics, pos_feedback, neg_feedback):
+    insights = []
+    if metrics["Attrition %"] > 15:
+        insights.append("High attrition observed; retention strategies should be reviewed.")
+    else:
+        insights.append("Attrition is within normal range.")
+    
+    if metrics["Satisfaction %"] < 75:
+        insights.append("Employee satisfaction is moderate; consider engagement initiatives.")
+    else:
+        insights.append("Employee satisfaction is strong.")
+    
+    if len(pos_feedback) > len(neg_feedback):
+        insights.append("Positive feedback outweighs negative feedback; culture seems healthy.")
+    else:
+        insights.append("Negative feedback is significant; cultural and operational improvements recommended.")
+    
+    return insights
 
 # ---------------------------
 # Streamlit Layout
@@ -120,6 +144,7 @@ if company:
     culture_keywords = generate_culture_keywords(sentiment_score)
     highlights = generate_highlights(sentiment_score)
     fake_reviews = generate_fake_reviews(company)
+    insights = generate_insights(metrics, pos_feedback, neg_feedback)
     
     # Executive Summary
     st.subheader("Executive Summary")
@@ -128,10 +153,11 @@ if company:
     # Key HR Metrics as Cards
     st.subheader("Key HR Metrics")
     col1, col2, col3, col4, col5 = st.columns(5)
+    
     col1.metric("Number of Reviews", metrics["Number of Reviews"])
-    col2.metric("Attrition %", f"{metrics['Attrition %']}%")
+    col2.metric("Attrition %", f"{metrics['Attrition %']}%", delta="High" if metrics['Attrition %']>15 else "OK")
     col3.metric("Average Tenure", f"{metrics['Average Tenure (yrs)']} yrs")
-    col4.metric("Satisfaction %", f"{metrics['Satisfaction %']}%")
+    col4.metric("Satisfaction %", f"{metrics['Satisfaction %']}%", delta="Low" if metrics['Satisfaction %']<75 else "Good")
     col5.metric("Overall Rating", metrics["Overall Rating"])
     
     # Employee Feedback
@@ -149,24 +175,37 @@ if company:
     for h in highlights:
         st.markdown(f"- {h}")
     
-    # Culture Word Cloud
-    st.subheader("Culture & Sentiment")
+    # Simulated Review Snippets
+    st.subheader("Simulated Review Snippets (from multiple sources)")
+    review_df = pd.DataFrame(fake_reviews)
+    st.dataframe(review_df, height=250)
+    
+    # Insights / Recommendations
+    st.subheader("Insights & Recommendations")
+    for insight in insights:
+        st.markdown(f"- {insight}")
+    
+    # Culture Word Cloud at the end
+    st.subheader("Culture & Sentiment Word Cloud")
     fig, ax = plt.subplots(figsize=(10,4))
     wc = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(culture_keywords)
     ax.imshow(wc, interpolation="bilinear")
     ax.axis("off")
     st.pyplot(fig)
     
-    # Simulated Review Snippets
-    st.subheader("Simulated Review Snippets (from multiple sources)")
-    review_df = pd.DataFrame(fake_reviews)
-    st.dataframe(review_df, height=200)
-    
-    # Downloadable Report
+    # Downloadable TXT Report
     st.subheader("Download Report")
     report_text = f"Company: {company}\n\nSummary:\n{summary}\n\nMetrics:\n" \
-                  f"{pd.DataFrame(metrics.items(), columns=['Metric','Value']).to_string(index=False)}"
-    st.download_button("Download Report as Text", report_text, file_name=f"{company}_HR_Report.txt")
+                  f"{pd.DataFrame(metrics.items(), columns=['Metric','Value']).to_string(index=False)}\n\n" \
+                  f"Positive Feedback: {pos_feedback}\nNegative Feedback: {neg_feedback}\n\n" \
+                  f"Highlights: {highlights}\n\nInsights: {insights}"
+    st.download_button("Download Report as TXT", report_text, file_name=f"{company}_HR_Report.txt")
     
-else:
-    st.info("Please enter a company name to generate the HR report.")
+    # Download PDF Report
+    pdf_btn = st.button("Download Report as PDF")
+    if pdf_btn:
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_font("Arial", 'B', 16)
+        pdf.cell(0, 10, f"HR Due Diligence Report: {company}", ln=True)
+        pdf.set_font("Arial
