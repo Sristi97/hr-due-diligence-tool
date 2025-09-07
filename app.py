@@ -35,7 +35,7 @@ def analyze_sentiment(texts):
         return avg, "Neutral"
 
 # -----------------------------
-# Function: Load sample employee reviews (simulate Glassdoor)
+# Function: Load sample employee reviews
 # -----------------------------
 def load_reviews():
     try:
@@ -46,10 +46,9 @@ def load_reviews():
         return []
 
 # -----------------------------
-# Function: Fetch jobs from Jooble (free jobs API)
+# Function: Fetch jobs (placeholder sample data)
 # -----------------------------
 def fetch_jobs(company):
-    # Sample placeholder (since Jooble/Adzuna require signup + free keys)
     jobs = [
         {"title": "HR Business Partner", "location": "Mumbai", "type": "Full-time"},
         {"title": "Software Engineer", "location": "Bangalore", "type": "Full-time"},
@@ -62,59 +61,67 @@ def fetch_jobs(company):
 # -----------------------------
 st.set_page_config(page_title="HR Due Diligence Tool", layout="wide")
 
-st.title("🕵️ HR Due Diligence Analysis Dashboard")
-st.markdown("A prototype tool to analyze company culture, jobs, and reputation using open data sources.")
+st.title("🕵️ HR Due Diligence Dashboard")
+st.markdown("Prototype tool to analyze **company culture, hiring trends, and reputation** using open data sources.")
 
 # Inputs
 company = st.text_input("Enter company name:", "Reliance Industries")
 api_key = st.text_input("Enter your NewsData.io API Key", type="password")
 
 if st.button("Run Analysis"):
-    # --- Section 1: Employee Reviews ---
-    st.header("💬 Culture & Employee Reviews")
-    reviews = load_reviews()
-    if reviews:
-        for r in reviews[:5]:  # show top 5 reviews
-            st.markdown(f"**Review:** {r['review']}")
-            st.markdown(f"- 👍 Pros: {r['pros']}")
-            st.markdown(f"- 👎 Cons: {r['cons']}")
-            st.markdown("---")
-    else:
-        st.warning("No reviews available (using sample data only).")
+    col1, col2, col3 = st.columns(3)
 
-    # --- Section 2: Jobs & Hiring Trends ---
-    st.header("📈 Jobs & Hiring Trends")
-    jobs = fetch_jobs(company)
-    if jobs:
-        for j in jobs:
-            st.markdown(f"**{j['title']}** – {j['location']} ({j['type']})")
-    else:
-        st.warning("No jobs found.")
-
-    # --- Section 3: Reputation & Compliance (News) ---
-    st.header("📰 Reputation & Compliance (News Analysis)")
-    if not api_key:
-        st.error("Please enter your NewsData.io API key for news analysis.")
-    else:
-        news_texts = fetch_news(company, api_key)
-        if news_texts:
-            combined_text = " ".join(news_texts)
-
-            # Sentiment
-            avg_score, sentiment = analyze_sentiment(news_texts)
-            st.markdown(f"**Overall News Sentiment:** {sentiment} ({avg_score:.2f})")
-
-            # Word Cloud
-            wordcloud = WordCloud(width=800, height=400, background_color="white").generate(combined_text)
-            st.subheader("Word Cloud from News Mentions")
-            fig, ax = plt.subplots()
-            ax.imshow(wordcloud, interpolation="bilinear")
-            ax.axis("off")
-            st.pyplot(fig)
-
-            # Articles
-            st.subheader("Latest News Articles")
-            for i, text in enumerate(news_texts[:5], 1):  # show top 5
-                st.write(f"**{i}.** {text}")
+    # --- Culture & Reviews ---
+    with col1:
+        st.subheader("💬 Culture & Reviews")
+        reviews = load_reviews()
+        if reviews:
+            for r in reviews[:3]:  # show top 3 reviews
+                with st.container():
+                    st.markdown(f"**{r['review']}**")
+                    st.markdown(f"- 👍 {r['pros']}")
+                    st.markdown(f"- 👎 {r['cons']}")
+                    st.markdown("---")
         else:
-            st.warning("No news found for this company.")
+            st.warning("No reviews available (sample only).")
+
+    # --- Jobs & Hiring Trends ---
+    with col2:
+        st.subheader("📈 Jobs & Hiring Trends")
+        jobs = fetch_jobs(company)
+        if jobs:
+            for j in jobs[:3]:  # top 3 jobs
+                with st.container():
+                    st.markdown(f"**{j['title']}**")
+                    st.markdown(f"📍 {j['location']} — {j['type']}")
+                    st.markdown("---")
+        else:
+            st.warning("No jobs found.")
+
+    # --- Reputation & News ---
+    with col3:
+        st.subheader("📰 Reputation & News")
+        if not api_key:
+            st.error("Enter your NewsData.io API key.")
+        else:
+            news_texts = fetch_news(company, api_key)
+            if news_texts:
+                combined_text = " ".join(news_texts)
+
+                # Sentiment
+                avg_score, sentiment = analyze_sentiment(news_texts)
+                st.markdown(f"**Sentiment:** {sentiment} ({avg_score:.2f})")
+
+                # Word Cloud
+                wordcloud = WordCloud(width=400, height=200, background_color="white").generate(combined_text)
+                fig, ax = plt.subplots(figsize=(5, 3))
+                ax.imshow(wordcloud, interpolation="bilinear")
+                ax.axis("off")
+                st.pyplot(fig)
+
+                # Show headlines
+                st.markdown("**Top News:**")
+                for i, text in enumerate(news_texts[:3], 1):
+                    st.write(f"{i}. {text}")
+            else:
+                st.warning("No news found.")
