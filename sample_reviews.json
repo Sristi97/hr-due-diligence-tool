@@ -1,17 +1,19 @@
-[
-  {
-    "review": "Great place to work with learning opportunities",
-    "pros": "Supportive team, good career growth",
-    "cons": "Long working hours"
-  },
-  {
-    "review": "Company has strong market presence",
-    "pros": "Brand value, challenging projects",
-    "cons": "Work-life balance could be better"
-  },
-  {
-    "review": "Good salary but stressful environment",
-    "pros": "Compensation is above average",
-    "cons": "High pressure and strict deadlines"
-  }
-]
+{
+  "generic_reviews": [
+    "Fast-paced and high-pressure work environment.",
+    "Strong focus on hierarchy, limited flexibility in decision making.",
+    "Good learning opportunities but work-life balance can be challenging.",
+    "Stable company with long-term career prospects.",
+    "Salary and perks are competitive compared to peers.",
+    "Supportive managers but bureaucracy can slow things down.",
+    "Collaborative work culture with emphasis on teamwork.",
+    "Innovation encouraged but processes can be rigid.",
+    "Diverse workforce with opportunities for growth.",
+    "Employees appreciate clear communication from leadership.",
+    "Focus on continuous learning and professional development.",
+    "Teams are supportive and encourage knowledge sharing.",
+    "Employee recognition programs boost morale.",
+    "Open communication channels between leadership and teams.",
+    "Flexible work arrangements available depending on the team."
+  ]
+}
