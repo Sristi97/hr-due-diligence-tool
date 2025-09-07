@@ -1,6 +1,6 @@
 streamlit
-nltk
+requests
+textblob
 wordcloud
 matplotlib
-wikipedia
-requests
+tweepy
