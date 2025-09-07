@@ -1,45 +1,97 @@
-import streamlit as st
+import os
 import json
 import requests
+import streamlit as st
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
 
-st.set_page_config(page_title="HR Due Diligence Dashboard", layout="wide")
+# -----------------------
+# App Config
+# -----------------------
+st.set_page_config(page_title="HR Due Diligence Tool", layout="wide")
 st.title("HR Due Diligence Dashboard")
 
-# Input for company
-company = st.text_input("Enter Company Name", "Reliance")
+# -----------------------
+# Inputs
+# -----------------------
+company_name = st.text_input("Enter Company Name", "Reliance")
 
-# Load fallback JSON data
-with open("sample_reviews.json") as f:
-    fallback_data = json.load(f)
+# -----------------------
+# Load API Key & Fallback JSON
+# -----------------------
+NEWS_API_KEY = os.getenv("NEWSDATA_API_KEY")
+fallback_file = "sample_reviews.json"
 
-# --- Fetch news from NewsData.io ---
-news_data = []
 try:
-    API_KEY = st.secrets["NEWSDATA_API_KEY"]
-    resp = requests.get(f"https://newsdata.io/api/1/news?apikey={API_KEY}&q={company}")
-    data = resp.json()
-    if data.get("status") == "success" and data.get("results"):
-        news_data = data.get("results")
+    with open(fallback_file, "r") as f:
+        fallback_data = json.load(f)
+except Exception:
+    fallback_data = {}
+
+# -----------------------
+# Fetch News
+# -----------------------
+news_data = []
+if NEWS_API_KEY:
+    try:
+        url = f"https://newsdata.io/api/1/news?apikey={NEWS_API_KEY}&q={company_name}&language=en"
+        response = requests.get(url).json()
+        if response.get("status") == "success":
+            news_data = response.get("results", [])
+        else:
+            st.warning(f"News API returned an error: {response.get('message', 'Unknown error')}")
+    except Exception as e:
+        st.error(f"Error fetching news: {e}")
+else:
+    st.info("NEWS API key not set. Using fallback data.")
+
+# -----------------------
+# Fallback News
+# -----------------------
+if not news_data:
+    news_data = fallback_data.get("news", {}).get("data", [])
+    if news_data:
+        st.info("Using sample JSON news data.")
     else:
-        news_data = fallback_data["news"]["data"]
-except:
-    news_data = fallback_data["news"]["data"]
+        st.warning("No news available in fallback JSON.")
 
-# Culture / Sentiment
-culture_snippets = fallback_data.get("google_snippets", [])
-wordcloud_words = fallback_data.get("culture_wordcloud", [])
+# -----------------------
+# Fetch Google Snippets / Reputation
+# -----------------------
+google_snippets = fallback_data.get("google_snippets", {}).get(company_name, {"message": "No Google snippets found."})
+reputation = fallback_data.get("reputation", {}).get(company_name, {
+    "reviews": {"message": "No reviews found."},
+    "employee_satisfaction": {"message": "No employee satisfaction data."},
+    "ratings": {"message": "No ratings found."},
+    "Glassdoor": {"message": "No Glassdoor data."}
+})
 
-# Reputation / Reviews
-reputation = fallback_data.get("reputation", {})
+# -----------------------
+# Word Cloud from Culture / Sentiment
+# -----------------------
+text_for_wordcloud = ""
+for item in news_data:
+    text_for_wordcloud += " " + item.get("title", "") + " " + item.get("description", "")
 
-# --- Display sections ---
-st.subheader("News")
-for n in news_data:
-    st.markdown(f"- {n.get('title','No title')} ({n.get('pubDate','')})")
+if not text_for_wordcloud.strip():
+    # Fallback text
+    text_for_wordcloud = "Work culture Employee engagement HR satisfaction Benefits Leadership Teamwork Innovation"
 
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text_for_wordcloud)
 st.subheader("Culture / Sentiment Word Cloud")
-st.text(" | ".join(wordcloud_words))
-st.text("Highlights: " + " | ".join(culture_snippets))
+fig, ax = plt.subplots(figsize=(10, 5))
+ax.imshow(wordcloud, interpolation='bilinear')
+ax.axis("off")
+st.pyplot(fig)
 
-st.subheader("Employee Reputation / Reviews")
-st.json(reputation)
+# -----------------------
+# Display JSON Data
+# -----------------------
+st.subheader("Raw JSON Data")
+output_json = {
+    "company": company_name,
+    "news": news_data if news_data else {"message": "No news available."},
+    "google_snippets": google_snippets,
+    "reputation": reputation
+}
+st.json(output_json)
