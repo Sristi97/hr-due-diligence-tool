@@ -23,35 +23,11 @@ st.title("HR Due Diligence Dashboard")
 company = st.selectbox("Select Company", companies)
 
 # ---------------------------
-# Function to generate multi-paragraph summary
-# ---------------------------
-def generate_long_summary(company, data):
-    summary = f"**{company} Executive Summary**\n\n"
-    summary += f"{data['summary']}\n\n"
-    
-    # Paragraph on positive aspects
-    pos_str = ", ".join(data['positive_feedback'])
-    summary += f"Employees highlight the following strengths: {pos_str}. These contribute to a collaborative and engaging work environment.\n\n"
-    
-    # Paragraph on challenges
-    neg_str = ", ".join(data['negative_feedback'])
-    summary += f"Areas for improvement include: {neg_str}. Addressing these can improve employee satisfaction and reduce attrition risks.\n\n"
-    
-    # Paragraph on highlights
-    highlights_str = " ".join(data['highlights'])
-    summary += f"Key observations from employee feedback and HR metrics indicate: {highlights_str}\n\n"
-    
-    # Optional recommendation paragraph
-    summary += "Overall, the company presents growth opportunities while facing operational challenges. Focus on recognition, workload management, and engagement initiatives is recommended."
-    
-    return summary
-
-# ---------------------------
 # Render report only if a company is selected
 # ---------------------------
 if company != "Select a company...":
     data = company_data[company]
-    summary = generate_long_summary(company, data)
+    summary = data["summary"]  # Use concise summary
     metrics = data["metrics"]
     pos_feedback = data["positive_feedback"]
     neg_feedback = data["negative_feedback"]
@@ -103,6 +79,7 @@ if company != "Select a company...":
         pdf.ln(10)
 
         pdf.set_font("Arial", '', 12)
+        pdf.multi_cell(0, 8, "Executive Summary:")
         pdf.multi_cell(0, 8, summary)
         pdf.ln(5)
 
