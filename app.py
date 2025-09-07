@@ -1,115 +1,88 @@
 import streamlit as st
+import json
 import random
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
-# ------------------------
-# Sample Data
-# ------------------------
-company_data = {
-    "Reliance": {
-        "reputation": {
-            "reviews": "4.1/5",
-            "employee_satisfaction": "Good",
-            "ratings": "4/5"
-        },
-        "culture": "Innovative, Collaborative, Fast-paced, Customer-focused",
-    },
-    "Tata": {
-        "reputation": {
-            "reviews": "3.9/5",
-            "employee_satisfaction": "Moderate",
-            "ratings": "3.8/5"
-        },
-        "culture": "Ethical, Team-oriented, Sustainable, Respectful",
-    }
-}
-
-# ------------------------
-# Dummy data generator
-# ------------------------
-def generate_dummy_data(company_name):
-    dummy_reviews = ["4.0/5", "Good", "3.8/5", "3.5/5", "Excellent", "Average"]
-    dummy_culture_words = [
-        "Innovative", "Collaborative", "Supportive", "Fast-paced",
-        "Flexible", "Inclusive", "Customer-focused", "Ethical"
-    ]
-    return {
-        "reputation": {
-            "reviews": random.choice(dummy_reviews),
-            "employee_satisfaction": random.choice(dummy_reviews),
-            "ratings": random.choice(dummy_reviews)
-        },
-        "culture": ", ".join(random.sample(dummy_culture_words, 4))
-    }
-
-# ------------------------
-# Streamlit Config
-# ------------------------
+# Set page config
 st.set_page_config(page_title="HR Due Diligence Dashboard", layout="wide")
 
-# ------------------------
-# Company Input
-# ------------------------
+# Load sample JSON data
+with open("sample_reviews.json", "r") as f:
+    sample_data = json.load(f)
+
+# Function to generate random dummy feedback if company not in JSON
+def generate_dummy_feedback():
+    feedback_pool = [
+        "Good work-life balance, but growth opportunities could improve.",
+        "Supportive management, decent benefits.",
+        "Challenging work, team collaboration is excellent.",
+        "Training programs are limited, but peers are helpful.",
+        "Fast-paced environment, learning opportunities are good.",
+        "Management listens but execution can be slow.",
+        "Flexible work hours and positive team culture.",
+        "Workload can be high, but recognition is fair.",
+    ]
+    return random.sample(feedback_pool, k=5)
+
+# Function to generate dummy ratings and satisfaction
+def generate_dummy_metrics():
+    return {
+        "reviews_count": random.randint(20, 200),
+        "employee_satisfaction": random.randint(60, 95),
+        "overall_rating": round(random.uniform(3.0, 4.8), 1)
+    }
+
+# Function to generate dummy culture keywords
+def generate_dummy_culture():
+    keywords = ["Innovation", "Collaboration", "Diversity", "Integrity", 
+                "Learning", "Transparency", "Inclusion", "Flexibility", "Accountability"]
+    random.shuffle(keywords)
+    return keywords[:7]
+
+# --- UI START ---
 st.title("HR Due Diligence Dashboard")
-company_name = st.text_input("Enter Company Name:", "").strip()
+st.markdown("Enter a company name to generate HR insights:")
+
+company_name = st.text_input("Company Name", "").strip()
 
 if company_name:
-    company_info = company_data.get(company_name, generate_dummy_data(company_name))
-
-    # ------------------------
-    # Summary Section
-    # ------------------------
-    st.subheader("Summary")
-    summary_text = (
-        f"{company_name} has a workforce culture that emphasizes collaboration and innovation. "
-        f"Overall employee satisfaction is {company_info['reputation']['employee_satisfaction']} "
-        f"with average ratings of {company_info['reputation']['ratings']}. "
-        f"Key cultural attributes include {company_info.get('culture', 'N/A')}."
-    )
-    st.info(summary_text)
-
-    # ------------------------
-    # Top Metrics
-    # ------------------------
-    st.subheader("Key Metrics")
-    col1, col2, col3 = st.columns(3)
-    col1.metric("Reviews", company_info["reputation"]["reviews"])
-    col2.metric("Employee Satisfaction", company_info["reputation"]["employee_satisfaction"])
-    col3.metric("Ratings", company_info["reputation"]["ratings"])
-
-    # ------------------------
-    # Employee Feedback in two columns
-    # ------------------------
-    st.subheader("Employee Feedback")
-    col_feedback1, col_feedback2 = st.columns(2)
-
-    feedback_list = [
-        f"{company_name} provides great career growth opportunities.",
-        f"{company_name} has a supportive management team.",
-        f"Work-life balance at {company_name} is good.",
-        f"{company_name} encourages learning and innovation.",
-        f"{company_name} values diversity and inclusion.",
-        f"{company_name} rewards high performance appropriately."
-    ]
-
-    feedback_sample = random.sample(feedback_list, k=4)
-    for i, fb in enumerate(feedback_sample):
-        if i % 2 == 0:
-            col_feedback1.write(f"- {fb}")
-        else:
-            col_feedback2.write(f"- {fb}")
-
-    # ------------------------
-    # Culture & Sentiment Word Cloud at the bottom
-    # ------------------------
-    st.subheader("Culture & Sentiment Word Cloud")
-    culture_text = company_info.get("culture", "")
-    if culture_text:
-        wordcloud = WordCloud(width=350, height=150, background_color="white").generate(culture_text)
-        plt.figure(figsize=(5, 2.5))
-        plt.imshow(wordcloud, interpolation="bilinear")
-        plt.axis("off")
-        st.pyplot(plt)
+    company_key = company_name.lower()
+    
+    if company_key in sample_data:
+        company_info = sample_data[company_key]
+        feedback_list = company_info.get("employee_feedback", [])
+        metrics = company_info.get("metrics", {})
+        culture_words = company_info.get("culture_words", [])
     else:
-        st.write("No culture text available.")
+        # Use dynamic dummy data
+        feedback_list = generate_dummy_feedback()
+        metrics = generate_dummy_metrics()
+        culture_words = generate_dummy_culture()
+    
+    # Summary Metrics
+    st.subheader(f"HR Metrics for {company_name}")
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Number of Reviews", metrics.get("reviews_count", 0))
+    col2.metric("Employee Satisfaction (%)", metrics.get("employee_satisfaction", 0))
+    col3.metric("Overall Rating", metrics.get("overall_rating", 0))
+
+    # Employee Feedback
+    st.subheader("Employee Feedback")
+    for feedback in feedback_list:
+        st.write(f"- {feedback}")
+
+    # Culture / Sentiment Word Cloud
+    st.subheader("Culture / Sentiment Word Cloud")
+    culture_text = " ".join(culture_words)
+    if culture_text:
+        wc = WordCloud(width=800, height=300, background_color="white", colormap="Set2").generate(culture_text)
+        fig, ax = plt.subplots(figsize=(12, 4))
+        ax.imshow(wc, interpolation="bilinear")
+        ax.axis("off")
+        st.pyplot(fig)
+    else:
+        st.write("No culture keywords available.")
+
+else:
+    st.info("Please enter a company name above to view HR insights.")
