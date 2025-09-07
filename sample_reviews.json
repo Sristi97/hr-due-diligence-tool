@@ -22,7 +22,7 @@
       "Satisfaction %": 90
     },
     "positive_feedback": ["Opportunities to learn", "Mentorship programs", "Strong leadership", "Inclusive environment"],
-    "negative_feedback": ["Internal politics", "High workload pressure", "Promotion delays", "Slow decision-making"],
+    "negative_feedback": [ "Promotion delays", "Slow decision-making"],
     "highlights": ["Employees appreciate the learning opportunities.", "Management is supportive but decision-making can be slow.", "Engagement programs improve satisfaction."]
   },
   "Apple": {
@@ -35,7 +35,7 @@
       "Satisfaction %": 85
     },
     "positive_feedback": ["Supportive team culture", "Opportunities to learn", "Good work-life balance", "Inclusive environment"],
-    "negative_feedback": ["High workload pressure", "Inconsistent policies", "Training gaps", "Promotion delays"],
+    "negative_feedback": ["Inconsistent policies", "Training gaps"],
     "highlights": ["Employees appreciate collaborative environment.", "Innovation is encouraged but execution is sometimes delayed.", "Work-life balance is rated highly."]
   },
   "Amazon": {
@@ -48,7 +48,7 @@
       "Satisfaction %": 78
     },
     "positive_feedback": ["Opportunities to learn", "Flexible hours", "Mentorship programs", "Strong leadership"],
-    "negative_feedback": ["Internal politics", "Limited recognition", "High workload pressure", "Training gaps"],
+    "negative_feedback": ["Internal politics", "High workload pressure"],
     "highlights": ["Efficiency is valued in daily work.", "Management is supportive but recognition is inconsistent.", "Employee engagement programs are growing."]
   },
   "Facebook": {
@@ -61,7 +61,7 @@
       "Satisfaction %": 86
     },
     "positive_feedback": ["Supportive team culture", "Mentorship programs", "Opportunities to learn", "Inclusive environment"],
-    "negative_feedback": ["High workload pressure", "Slow decision-making", "Promotion delays", "Internal politics"],
+    "negative_feedback": ["Promotion delays", "Internal politics"],
     "highlights": ["Collaborative environment is valued.", "Management is supportive but decision-making can be slow.", "Work-life balance is rated well among teams."]
   },
   "Netflix": {
@@ -74,7 +74,7 @@
       "Satisfaction %": 82
     },
     "positive_feedback": ["Creative freedom", "Opportunities to learn", "Flexible hours", "Inclusive environment"],
-    "negative_feedback": ["High workload pressure", "Limited recognition", "Slow decision-making", "Training gaps"],
+    "negative_feedback": ["Limited recognition","Training gaps"],
     "highlights": ["Employees enjoy creative freedom.", "Management supports innovation but workload can be high.", "Team collaboration is strong."]
   },
   "Tesla": {
@@ -87,7 +87,7 @@
       "Satisfaction %": 76
     },
     "positive_feedback": ["Innovation-driven", "Opportunities to work on impactful projects", "Flexible hours", "Fast decision-making"],
-    "negative_feedback": ["High workload pressure", "Limited recognition", "Internal politics", "Promotion delays"],
+    "negative_feedback": ["High workload pressure", "Limited recognition"],
     "highlights": ["Employees value innovation but face workload challenges.", "Fast execution is both exciting and stressful.", "Team engagement programs are developing."]
   },
   "IBM": {
@@ -100,7 +100,7 @@
       "Satisfaction %": 88
     },
     "positive_feedback": ["Structured work process", "Global collaboration", "Opportunities for learning", "Mentorship programs"],
-    "negative_feedback": ["Slow decision-making", "Training gaps", "Internal politics", "Limited recognition"],
+    "negative_feedback": ["Training gaps","Compensation"],
     "highlights": ["Structured work environment appreciated.", "Global exposure is a plus.", "Decision-making can be slow at times."]
   },
   "Intel": {
@@ -113,7 +113,7 @@
       "Satisfaction %": 84
     },
     "positive_feedback": ["Opportunities to learn", "Technical excellence", "Collaborative teams", "Innovation-driven environment"],
-    "negative_feedback": ["High workload", "Internal politics", "Promotion delays", "Limited recognition"],
+    "negative_feedback": ["No flexibility", "Limited recognition"],
     "highlights": ["Technical work is rewarding.", "Collaboration across teams is strong.", "Operational challenges exist but manageable."]
   },
   "Cisco": {
@@ -126,7 +126,7 @@
       "Satisfaction %": 88
     },
     "positive_feedback": ["Collaboration", "Learning opportunities", "Innovation encouraged", "Good work-life balance"],
-    "negative_feedback": ["Workload pressure", "Limited recognition", "Internal politics", "Training gaps"],
+    "negative_feedback": ["Workload pressure", "Limited recognition"],
     "highlights": ["Collaborative environment is valued.", "Employees enjoy learning opportunities.", "Recognition programs could improve."]
   },
 
@@ -140,7 +140,7 @@
       "Satisfaction %": 85
     },
     "positive_feedback": ["Collaborative environment", "Opportunities to learn", "Supportive leadership", "Inclusive culture"],
-    "negative_feedback": ["High workload", "Promotion delays", "Internal politics", "Recognition gaps"],
+    "negative_feedback": ["Internal politics", "Recognition gaps"],
     "highlights": ["Employees appreciate learning opportunities.", "Management is supportive but promotions are slow.", "Work-life balance is generally positive."]
   },
   "Oracle": {
@@ -153,7 +153,7 @@
       "Satisfaction %": 82
     },
     "positive_feedback": ["Technical excellence", "Structured processes", "Learning opportunities", "Global collaboration"],
-    "negative_feedback": ["Slow decision-making", "Internal politics", "Limited recognition", "Training gaps"],
+    "negative_feedback": ["No Transparency", "Limited recognition", "Burnout"],
     "highlights": ["Structured processes support work efficiency.", "Technical work is rewarding.", "Decision-making can be slow at times."]
   },
   "SAP": {
@@ -166,7 +166,7 @@
       "Satisfaction %": 84
     },
     "positive_feedback": ["Collaborative culture", "Innovation encouraged", "Learning opportunities", "Supportive leadership"],
-    "negative_feedback": ["High workload", "Recognition gaps", "Internal politics", "Slow decision-making"],
+    "negative_feedback": ["High workload", "No Career Progression"],
     "highlights": ["Collaborative culture is valued.", "Innovation is encouraged.", "Employees appreciate learning opportunities."]
   },
   "Adobe": {
@@ -179,7 +179,7 @@
       "Satisfaction %": 87
     },
     "positive_feedback": ["Creative freedom", "Supportive leadership", "Opportunities to learn", "Inclusive environment"],
-    "negative_feedback": ["High workload", "Promotion delays", "Limited recognition", "Internal politics"],
+    "negative_feedback": ["Poor communication", "Promotion delays"],
     "highlights": ["Creative freedom is valued by employees.", "Management is supportive.", "Work-life balance is rated well."]
   },
   "Twitter": {
@@ -192,7 +192,7 @@
       "Satisfaction %": 83
     },
     "positive_feedback": ["Collaborative environment", "Opportunities to learn", "Fast-paced innovation", "Supportive leadership"],
-    "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
+    "negative_feedback": ["High workload", "No mentorship"],
     "highlights": ["Fast-paced environment encourages innovation.", "Employees enjoy collaboration.", "Some workload challenges exist."]
   },
   "LinkedIn": {
@@ -205,7 +205,7 @@
       "Satisfaction %": 88
     },
     "positive_feedback": ["Career growth", "Collaborative teams", "Supportive leadership", "Learning opportunities"],
-    "negative_feedback": ["High workload", "Internal politics", "Promotion delays", "Recognition gaps"],
+    "negative_feedback": ["High workload","Recognition gaps"],
     "highlights": ["Career growth opportunities are strong.", "Collaborative environment is valued.", "Workload management could improve."]
   },
   "Uber": {
@@ -218,7 +218,7 @@
       "Satisfaction %": 78
     },
     "positive_feedback": ["Opportunities to work on impactful projects", "Team collaboration", "Fast-paced environment", "Innovation-driven culture"],
-    "negative_feedback": ["High workload", "Limited recognition", "Internal politics", "Promotion delays"],
+    "negative_feedback": ["Micromanagement", "Weak leadership"],
     "highlights": ["Exciting projects are valued.", "Fast-paced environment encourages learning.", "Workload can be challenging."]
   },
   "Lyft": {
@@ -231,7 +231,7 @@
       "Satisfaction %": 80
     },
     "positive_feedback": ["Collaborative environment", "Employee engagement", "Opportunities to learn", "Supportive leadership"],
-    "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
+    "negative_feedback": ["Limited recognition", "Promotion delays"],
     "highlights": ["Collaboration is valued.", "Engagement initiatives are positive.", "Some operational challenges exist."]
   },
   "Airbnb": {
@@ -244,7 +244,7 @@
       "Satisfaction %": 85
     },
     "positive_feedback": ["Innovation-driven culture", "Collaborative teams", "Opportunities to learn", "Supportive leadership"],
-    "negative_feedback": ["High workload", "Promotion delays", "Limited recognition", "Internal politics"],
+    "negative_feedback": ["Long hours", "Overworked teams"],
     "highlights": ["Innovation and collaboration are highly valued.", "Employees enjoy learning opportunities.", "Management is supportive."]
   },
   "Shopify": {
@@ -257,7 +257,7 @@
       "Satisfaction %": 82
     },
     "positive_feedback": ["Creative freedom", "Collaborative environment", "Opportunities to learn", "Supportive leadership"],
-    "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
+    "negative_feedback": ["Training gaps", "Low team collaboration", "Inconsistent policies"],
     "highlights": ["Employees enjoy creative freedom.", "Collaboration is encouraged.", "Workload management could improve."]
   },
    "PayPal": {
@@ -270,7 +270,7 @@
       "Satisfaction %": 84
     },
     "positive_feedback": ["Opportunities to learn", "Collaborative environment", "Supportive leadership", "Innovation encouraged"],
-    "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
+    "negative_feedback": ["Insufficient resources", "Delayed promotions", "Limited mentoring"],
     "highlights": ["Employees enjoy learning opportunities.", "Collaboration is valued.", "Management is supportive."]
   },
   "Square": {
@@ -283,7 +283,7 @@
       "Satisfaction %": 82
     },
     "positive_feedback": ["Collaborative teams", "Innovation-driven culture", "Opportunities to learn", "Supportive leadership"],
-    "negative_feedback": ["High workload", "Promotion delays", "Limited recognition", "Internal politics"],
+    "negative_feedback": ["Training gaps", "Low team collaboration", "Inconsistent policies"],
     "highlights": ["Collaboration is emphasized.", "Innovation is valued.", "Workload can be challenging at times."]
   },
   "Zoom": {
@@ -296,7 +296,7 @@
       "Satisfaction %": 80
     },
     "positive_feedback": ["Collaborative environment", "Innovation-driven projects", "Opportunities to learn", "Supportive leadership"],
-    "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
+    "negative_feedback": ["Limited perks", "Team conflicts", "Weak leadership"],
     "highlights": ["Employees value collaboration.", "Innovation is encouraged.", "Workload can be challenging."]
   },
   "Slack": {
@@ -309,7 +309,7 @@
       "Satisfaction %": 82
     },
     "positive_feedback": ["Collaborative environment", "Opportunities to learn", "Supportive leadership", "Innovation-driven culture"],
-    "negative_feedback": ["High workload", "Promotion delays", "Limited recognition", "Internal politics"],
+    "negative_feedback": ["Insufficient resources", "Delayed promotions", "Limited mentoring"],
     "highlights": ["Employees appreciate collaboration.", "Innovation is encouraged.", "Workload management could improve."]
   },
   "Spotify": {
@@ -322,7 +322,7 @@
       "Satisfaction %": 84
     },
     "positive_feedback": ["Creative freedom", "Innovation-driven projects", "Collaborative teams", "Supportive leadership"],
-    "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
+    "negative_feedback": ["Limited perks", "Team conflicts", "Weak leadership"],
     "highlights": ["Creativity is highly valued.", "Collaboration is encouraged.", "Workload can be a challenge."]
   },
   "Dropbox": {
@@ -335,7 +335,7 @@
       "Satisfaction %": 83
     },
     "positive_feedback": ["Collaborative teams", "Opportunities to learn", "Supportive leadership", "Innovation encouraged"],
-    "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
+    "negative_feedback": ["Resistance to change", "Work-life imbalance", "Unclear expectations"],
     "highlights": ["Employees appreciate collaboration.", "Learning opportunities are valued.", "Workload can be high at times."]
   },
   "HP": {
@@ -348,7 +348,7 @@
       "Satisfaction %": 82
     },
     "positive_feedback": ["Structured processes", "Collaborative environment", "Learning opportunities", "Supportive leadership"],
-    "negative_feedback": ["High workload", "Limited recognition", "Slow decision-making", "Internal politics"],
+    "negative_feedback": ["Resistance to change", "Work-life imbalance", "Unclear expectations"],
     "highlights": ["Employees value structured work.", "Collaboration is emphasized.", "Workload can be high."]
   },
   "Dell": {
@@ -361,7 +361,7 @@
       "Satisfaction %": 83
     },
     "positive_feedback": ["Technical excellence", "Collaborative teams", "Learning opportunities", "Supportive leadership"],
-    "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
+    "negative_feedback": ["Tight deadlines", "Below-market pay", "Lack of recognition"],
     "highlights": ["Employees value technical work.", "Collaboration is strong.", "Workload can be challenging."]
   },
   "Nvidia": {
@@ -374,7 +374,7 @@
       "Satisfaction %": 85
     },
     "positive_feedback": ["Technical innovation", "Collaborative teams", "Opportunities to learn", "Supportive leadership"],
-    "negative_feedback": ["High workload", "Promotion delays", "Limited recognition", "Internal politics"],
+    "negative_feedback": ["Tight deadlines", "Below-market pay", "Lack of recognition"],
     "highlights": ["Employees enjoy working on advanced technologies.", "Collaboration is encouraged.", "Workload can be high."]
   },
   "AMD": {
@@ -387,7 +387,7 @@
       "Satisfaction %": 82
     },
     "positive_feedback": ["Technical excellence", "Opportunities to learn", "Collaborative teams", "Innovation-driven environment"],
-    "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
+    "negative_feedback": ["Poor communication", "High attrition", "Limited career growth"],
     "highlights": ["Employees value technical work.", "Collaboration is encouraged.", "Workload can be a challenge."]
   }, "Deloitte": {
     "summary": "Deloitte emphasizes professional development, collaborative culture, and client-focused work. While workload is high at times, employees value the mentorship and learning opportunities. Overall, Deloitte offers strong career growth in a dynamic environment.",
@@ -458,5 +458,6 @@
     ]
   }
 }
+
 
 
