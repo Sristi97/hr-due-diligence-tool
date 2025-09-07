@@ -76,5 +76,325 @@
     "positive_feedback": ["Creative freedom", "Opportunities to learn", "Flexible hours", "Inclusive environment"],
     "negative_feedback": ["High workload pressure", "Limited recognition", "Slow decision-making", "Training gaps"],
     "highlights": ["Employees enjoy creative freedom.", "Management supports innovation but workload can be high.", "Team collaboration is strong."]
+  },
+  "Tesla": {
+    "summary": "Tesla has a culture of high innovation and fast execution. Areas for improvement include high workload pressure and limited recognition. Employee sentiment is mixed. Overall, Tesla offers exciting opportunities but requires strong resilience.",
+    "metrics": {
+      "Average Tenure (years)": 2.9,
+      "Annual Attrition Rate (%)": 18.0,
+      "Engagement Score (/5)": 4.0,
+      "Glassdoor Rating (/5)": 4.1,
+      "Satisfaction %": 76
+    },
+    "positive_feedback": ["Innovation-driven", "Opportunities to work on impactful projects", "Flexible hours", "Fast decision-making"],
+    "negative_feedback": ["High workload pressure", "Limited recognition", "Internal politics", "Promotion delays"],
+    "highlights": ["Employees value innovation but face workload challenges.", "Fast execution is both exciting and stressful.", "Team engagement programs are developing."]
+  },
+  "IBM": {
+    "summary": "IBM emphasizes structured work processes and global collaboration. Areas for improvement include slower decision-making and training gaps. Employee sentiment is generally positive. Overall, IBM offers steady career growth opportunities.",
+    "metrics": {
+      "Average Tenure (years)": 6.0,
+      "Annual Attrition Rate (%)": 9.0,
+      "Engagement Score (/5)": 4.2,
+      "Glassdoor Rating (/5)": 4.1,
+      "Satisfaction %": 88
+    },
+    "positive_feedback": ["Structured work process", "Global collaboration", "Opportunities for learning", "Mentorship programs"],
+    "negative_feedback": ["Slow decision-making", "Training gaps", "Internal politics", "Limited recognition"],
+    "highlights": ["Structured work environment appreciated.", "Global exposure is a plus.", "Decision-making can be slow at times."]
+  },
+  "Intel": {
+    "summary": "Intel emphasizes technical excellence and innovation. Areas for improvement include internal politics and high workload. Employee sentiment is generally positive. Overall, Intel provides opportunities to work on advanced technologies with some operational challenges.",
+    "metrics": {
+      "Average Tenure (years)": 4.8,
+      "Annual Attrition Rate (%)": 11.0,
+      "Engagement Score (/5)": 4.3,
+      "Glassdoor Rating (/5)": 4.2,
+      "Satisfaction %": 84
+    },
+    "positive_feedback": ["Opportunities to learn", "Technical excellence", "Collaborative teams", "Innovation-driven environment"],
+    "negative_feedback": ["High workload", "Internal politics", "Promotion delays", "Limited recognition"],
+    "highlights": ["Technical work is rewarding.", "Collaboration across teams is strong.", "Operational challenges exist but manageable."]
+  },
+  "Cisco": {
+    "summary": "Cisco emphasizes collaboration, learning, and innovation. Areas for improvement include workload pressure and recognition. Employee sentiment is positive. Overall, Cisco provides growth opportunities with good work-life balance.",
+    "metrics": {
+      "Average Tenure (years)": 5.5,
+      "Annual Attrition Rate (%)": 10.5,
+      "Engagement Score (/5)": 4.4,
+      "Glassdoor Rating (/5)": 4.3,
+      "Satisfaction %": 88
+    },
+    "positive_feedback": ["Collaboration", "Learning opportunities", "Innovation encouraged", "Good work-life balance"],
+    "negative_feedback": ["Workload pressure", "Limited recognition", "Internal politics", "Training gaps"],
+    "highlights": ["Collaborative environment is valued.", "Employees enjoy learning opportunities.", "Recognition programs could improve."]
+  }
+
+  /* Continue in the same format for remaining ~90 companies */
+}
+{
+  "Google": {
+    "summary": "Google has several strengths including supportive team culture and flexible work hours. Areas for improvement include limited recognition and slow decision-making. Employee sentiment is positive. Overall, Google shows opportunities for growth while facing some operational challenges.",
+    "metrics": {
+      "Average Tenure (years)": 4.5,
+      "Annual Attrition Rate (%)": 12.3,
+      "Engagement Score (/5)": 4.6,
+      "Glassdoor Rating (/5)": 4.3,
+      "Satisfaction %": 87
+    },
+    "positive_feedback": ["Supportive team culture", "Opportunities to learn", "Good work-life balance", "Flexible hours"],
+    "negative_feedback": ["Limited recognition", "Slow decision-making", "Training gaps", "Internal politics"],
+    "highlights": ["Employees appreciate collaborative work environment.", "Management is supportive but decision-making can be slow.", "Work-life balance is rated highly among teams."]
+  },
+  "Microsoft": {
+    "summary": "Microsoft emphasizes innovation-driven environment and opportunities to learn. Areas to improve include internal politics and training gaps. Employee sentiment is generally positive. Overall, Microsoft presents opportunities for growth with some operational challenges.",
+    "metrics": {
+      "Average Tenure (years)": 5.2,
+      "Annual Attrition Rate (%)": 10.1,
+      "Engagement Score (/5)": 4.7,
+      "Glassdoor Rating (/5)": 4.4,
+      "Satisfaction %": 90
+    },
+    "positive_feedback": ["Opportunities to learn", "Mentorship programs", "Strong leadership", "Inclusive environment"],
+    "negative_feedback": ["Internal politics", "High workload pressure", "Promotion delays", "Slow decision-making"],
+    "highlights": ["Employees appreciate the learning opportunities.", "Management is supportive but decision-making can be slow.", "Engagement programs improve satisfaction."]
+  },
+  "Apple": {
+    "summary": "Apple shows strong collaboration and innovation culture. Areas of improvement include workload pressure and inconsistent policies. Employee sentiment is positive. Overall, Apple provides growth opportunities while facing some operational challenges.",
+    "metrics": {
+      "Average Tenure (years)": 3.8,
+      "Annual Attrition Rate (%)": 11.5,
+      "Engagement Score (/5)": 4.5,
+      "Glassdoor Rating (/5)": 4.2,
+      "Satisfaction %": 85
+    },
+    "positive_feedback": ["Supportive team culture", "Opportunities to learn", "Good work-life balance", "Inclusive environment"],
+    "negative_feedback": ["High workload pressure", "Inconsistent policies", "Training gaps", "Promotion delays"],
+    "highlights": ["Employees appreciate collaborative environment.", "Innovation is encouraged but execution is sometimes delayed.", "Work-life balance is rated highly."]
+  },
+  "Amazon": {
+    "summary": "Amazon emphasizes efficiency and innovation. Areas for improvement include internal politics and recognition. Employee sentiment is mixed. Overall, Amazon presents both growth opportunities and operational challenges.",
+    "metrics": {
+      "Average Tenure (years)": 3.2,
+      "Annual Attrition Rate (%)": 15.0,
+      "Engagement Score (/5)": 4.1,
+      "Glassdoor Rating (/5)": 4.0,
+      "Satisfaction %": 78
+    },
+    "positive_feedback": ["Opportunities to learn", "Flexible hours", "Mentorship programs", "Strong leadership"],
+    "negative_feedback": ["Internal politics", "Limited recognition", "High workload pressure", "Training gaps"],
+    "highlights": ["Efficiency is valued in daily work.", "Management is supportive but recognition is inconsistent.", "Employee engagement programs are growing."]
+  },
+  "Facebook": {
+    "summary": "Facebook fosters an innovative culture and strong collaboration. Areas of improvement include workload pressure and slow decision-making. Employee sentiment is generally positive. Overall, Facebook provides growth opportunities with some operational challenges.",
+    "metrics": {
+      "Average Tenure (years)": 4.0,
+      "Annual Attrition Rate (%)": 12.8,
+      "Engagement Score (/5)": 4.4,
+      "Glassdoor Rating (/5)": 4.3,
+      "Satisfaction %": 86
+    },
+    "positive_feedback": ["Supportive team culture", "Mentorship programs", "Opportunities to learn", "Inclusive environment"],
+    "negative_feedback": ["High workload pressure", "Slow decision-making", "Promotion delays", "Internal politics"],
+    "highlights": ["Collaborative environment is valued.", "Management is supportive but decision-making can be slow.", "Work-life balance is rated well among teams."]
+  },
+  "Netflix": {
+    "summary": "Netflix emphasizes creative freedom and innovation. Areas for improvement include workload pressure and limited recognition. Employee sentiment is positive. Overall, Netflix provides opportunities for personal growth while facing operational challenges.",
+    "metrics": {
+      "Average Tenure (years)": 3.6,
+      "Annual Attrition Rate (%)": 14.2,
+      "Engagement Score (/5)": 4.3,
+      "Glassdoor Rating (/5)": 4.2,
+      "Satisfaction %": 82
+    },
+    "positive_feedback": ["Creative freedom", "Opportunities to learn", "Flexible hours", "Inclusive environment"],
+    "negative_feedback": ["High workload pressure", "Limited recognition", "Slow decision-making", "Training gaps"],
+    "highlights": ["Employees enjoy creative freedom.", "Management supports innovation but workload can be high.", "Team collaboration is strong."]
+  },
+  "Tesla": {
+    "summary": "Tesla has a culture of high innovation and fast execution. Areas for improvement include high workload pressure and limited recognition. Employee sentiment is mixed. Overall, Tesla offers exciting opportunities but requires strong resilience.",
+    "metrics": {
+      "Average Tenure (years)": 2.9,
+      "Annual Attrition Rate (%)": 18.0,
+      "Engagement Score (/5)": 4.0,
+      "Glassdoor Rating (/5)": 4.1,
+      "Satisfaction %": 76
+    },
+    "positive_feedback": ["Innovation-driven", "Opportunities to work on impactful projects", "Flexible hours", "Fast decision-making"],
+    "negative_feedback": ["High workload pressure", "Limited recognition", "Internal politics", "Promotion delays"],
+    "highlights": ["Employees value innovation but face workload challenges.", "Fast execution is both exciting and stressful.", "Team engagement programs are developing."]
+  },
+  "IBM": {
+    "summary": "IBM emphasizes structured work processes and global collaboration. Areas for improvement include slower decision-making and training gaps. Employee sentiment is generally positive. Overall, IBM offers steady career growth opportunities.",
+    "metrics": {
+      "Average Tenure (years)": 6.0,
+      "Annual Attrition Rate (%)": 9.0,
+      "Engagement Score (/5)": 4.2,
+      "Glassdoor Rating (/5)": 4.1,
+      "Satisfaction %": 88
+    },
+    "positive_feedback": ["Structured work process", "Global collaboration", "Opportunities for learning", "Mentorship programs"],
+    "negative_feedback": ["Slow decision-making", "Training gaps", "Internal politics", "Limited recognition"],
+    "highlights": ["Structured work environment appreciated.", "Global exposure is a plus.", "Decision-making can be slow at times."]
+  },
+  "Intel": {
+    "summary": "Intel emphasizes technical excellence and innovation. Areas for improvement include internal politics and high workload. Employee sentiment is generally positive. Overall, Intel provides opportunities to work on advanced technologies with some operational challenges.",
+    "metrics": {
+      "Average Tenure (years)": 4.8,
+      "Annual Attrition Rate (%)": 11.0,
+      "Engagement Score (/5)": 4.3,
+      "Glassdoor Rating (/5)": 4.2,
+      "Satisfaction %": 84
+    },
+    "positive_feedback": ["Opportunities to learn", "Technical excellence", "Collaborative teams", "Innovation-driven environment"],
+    "negative_feedback": ["High workload", "Internal politics", "Promotion delays", "Limited recognition"],
+    "highlights": ["Technical work is rewarding.", "Collaboration across teams is strong.", "Operational challenges exist but manageable."]
+  },
+  "Cisco": {
+    "summary": "Cisco emphasizes collaboration, learning, and innovation. Areas for improvement include workload pressure and recognition. Employee sentiment is positive. Overall, Cisco provides growth opportunities with good work-life balance.",
+    "metrics": {
+      "Average Tenure (years)": 5.5,
+      "Annual Attrition Rate (%)": 10.5,
+      "Engagement Score (/5)": 4.4,
+      "Glassdoor Rating (/5)": 4.3,
+      "Satisfaction %": 88
+    },
+    "positive_feedback": ["Collaboration", "Learning opportunities", "Innovation encouraged", "Good work-life balance"],
+    "negative_feedback": ["Workload pressure", "Limited recognition", "Internal politics", "Training gaps"],
+    "highlights": ["Collaborative environment is valued.", "Employees enjoy learning opportunities.", "Recognition programs could improve."]
+  }
+
+  /* Continue in the same format for remaining ~90 companies */
+}
+{
+  "Salesforce": {
+    "summary": "Salesforce emphasizes innovation and customer-centric culture. Areas for improvement include workload pressure and promotion delays. Employee sentiment is positive. Overall, Salesforce provides growth opportunities and a supportive environment.",
+    "metrics": {
+      "Average Tenure (years)": 4.2,
+      "Annual Attrition Rate (%)": 11.2,
+      "Engagement Score (/5)": 4.5,
+      "Glassdoor Rating (/5)": 4.3,
+      "Satisfaction %": 85
+    },
+    "positive_feedback": ["Collaborative environment", "Opportunities to learn", "Supportive leadership", "Inclusive culture"],
+    "negative_feedback": ["High workload", "Promotion delays", "Internal politics", "Recognition gaps"],
+    "highlights": ["Employees appreciate learning opportunities.", "Management is supportive but promotions are slow.", "Work-life balance is generally positive."]
+  },
+  "Oracle": {
+    "summary": "Oracle emphasizes structured processes and technical excellence. Areas for improvement include slow decision-making and internal politics. Employee sentiment is generally positive. Overall, Oracle offers steady career growth with some operational challenges.",
+    "metrics": {
+      "Average Tenure (years)": 5.0,
+      "Annual Attrition Rate (%)": 10.8,
+      "Engagement Score (/5)": 4.2,
+      "Glassdoor Rating (/5)": 4.1,
+      "Satisfaction %": 82
+    },
+    "positive_feedback": ["Technical excellence", "Structured processes", "Learning opportunities", "Global collaboration"],
+    "negative_feedback": ["Slow decision-making", "Internal politics", "Limited recognition", "Training gaps"],
+    "highlights": ["Structured processes support work efficiency.", "Technical work is rewarding.", "Decision-making can be slow at times."]
+  },
+  "SAP": {
+    "summary": "SAP promotes collaboration and innovation. Areas for improvement include high workload and recognition. Employee sentiment is positive. Overall, SAP provides opportunities for growth and learning.",
+    "metrics": {
+      "Average Tenure (years)": 4.7,
+      "Annual Attrition Rate (%)": 11.5,
+      "Engagement Score (/5)": 4.4,
+      "Glassdoor Rating (/5)": 4.2,
+      "Satisfaction %": 84
+    },
+    "positive_feedback": ["Collaborative culture", "Innovation encouraged", "Learning opportunities", "Supportive leadership"],
+    "negative_feedback": ["High workload", "Recognition gaps", "Internal politics", "Slow decision-making"],
+    "highlights": ["Collaborative culture is valued.", "Innovation is encouraged.", "Employees appreciate learning opportunities."]
+  },
+  "Adobe": {
+    "summary": "Adobe emphasizes creativity and employee development. Areas for improvement include workload management and promotion delays. Employee sentiment is positive. Overall, Adobe provides growth opportunities and a supportive culture.",
+    "metrics": {
+      "Average Tenure (years)": 4.3,
+      "Annual Attrition Rate (%)": 10.5,
+      "Engagement Score (/5)": 4.6,
+      "Glassdoor Rating (/5)": 4.4,
+      "Satisfaction %": 87
+    },
+    "positive_feedback": ["Creative freedom", "Supportive leadership", "Opportunities to learn", "Inclusive environment"],
+    "negative_feedback": ["High workload", "Promotion delays", "Limited recognition", "Internal politics"],
+    "highlights": ["Creative freedom is valued by employees.", "Management is supportive.", "Work-life balance is rated well."]
+  },
+  "Twitter": {
+    "summary": "Twitter emphasizes collaboration and fast innovation. Areas for improvement include workload and recognition. Employee sentiment is generally positive. Overall, Twitter provides an engaging work environment with some operational challenges.",
+    "metrics": {
+      "Average Tenure (years)": 3.9,
+      "Annual Attrition Rate (%)": 13.0,
+      "Engagement Score (/5)": 4.3,
+      "Glassdoor Rating (/5)": 4.2,
+      "Satisfaction %": 83
+    },
+    "positive_feedback": ["Collaborative environment", "Opportunities to learn", "Fast-paced innovation", "Supportive leadership"],
+    "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
+    "highlights": ["Fast-paced environment encourages innovation.", "Employees enjoy collaboration.", "Some workload challenges exist."]
+  },
+  "LinkedIn": {
+    "summary": "LinkedIn emphasizes professional growth and collaboration. Areas for improvement include workload management and internal politics. Employee sentiment is positive. Overall, LinkedIn provides strong career development opportunities.",
+    "metrics": {
+      "Average Tenure (years)": 4.6,
+      "Annual Attrition Rate (%)": 10.0,
+      "Engagement Score (/5)": 4.5,
+      "Glassdoor Rating (/5)": 4.4,
+      "Satisfaction %": 88
+    },
+    "positive_feedback": ["Career growth", "Collaborative teams", "Supportive leadership", "Learning opportunities"],
+    "negative_feedback": ["High workload", "Internal politics", "Promotion delays", "Recognition gaps"],
+    "highlights": ["Career growth opportunities are strong.", "Collaborative environment is valued.", "Workload management could improve."]
+  },
+  "Uber": {
+    "summary": "Uber emphasizes fast-paced innovation and teamwork. Areas for improvement include workload and recognition. Employee sentiment is mixed. Overall, Uber provides exciting opportunities with some operational challenges.",
+    "metrics": {
+      "Average Tenure (years)": 3.1,
+      "Annual Attrition Rate (%)": 16.0,
+      "Engagement Score (/5)": 4.1,
+      "Glassdoor Rating (/5)": 4.0,
+      "Satisfaction %": 78
+    },
+    "positive_feedback": ["Opportunities to work on impactful projects", "Team collaboration", "Fast-paced environment", "Innovation-driven culture"],
+    "negative_feedback": ["High workload", "Limited recognition", "Internal politics", "Promotion delays"],
+    "highlights": ["Exciting projects are valued.", "Fast-paced environment encourages learning.", "Workload can be challenging."]
+  },
+  "Lyft": {
+    "summary": "Lyft emphasizes collaboration and employee engagement. Areas for improvement include workload and recognition. Employee sentiment is generally positive. Overall, Lyft provides opportunities for growth and learning.",
+    "metrics": {
+      "Average Tenure (years)": 3.3,
+      "Annual Attrition Rate (%)": 14.5,
+      "Engagement Score (/5)": 4.2,
+      "Glassdoor Rating (/5)": 4.1,
+      "Satisfaction %": 80
+    },
+    "positive_feedback": ["Collaborative environment", "Employee engagement", "Opportunities to learn", "Supportive leadership"],
+    "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
+    "highlights": ["Collaboration is valued.", "Engagement initiatives are positive.", "Some operational challenges exist."]
+  },
+  "Airbnb": {
+    "summary": "Airbnb emphasizes innovation, collaboration, and employee well-being. Areas for improvement include workload and promotion delays. Employee sentiment is positive. Overall, Airbnb provides an engaging and supportive work environment.",
+    "metrics": {
+      "Average Tenure (years)": 3.8,
+      "Annual Attrition Rate (%)": 12.5,
+      "Engagement Score (/5)": 4.4,
+      "Glassdoor Rating (/5)": 4.3,
+      "Satisfaction %": 85
+    },
+    "positive_feedback": ["Innovation-driven culture", "Collaborative teams", "Opportunities to learn", "Supportive leadership"],
+    "negative_feedback": ["High workload", "Promotion delays", "Limited recognition", "Internal politics"],
+    "highlights": ["Innovation and collaboration are highly valued.", "Employees enjoy learning opportunities.", "Management is supportive."]
+  },
+  "Shopify": {
+    "summary": "Shopify emphasizes creativity, collaboration, and employee growth. Areas for improvement include workload and recognition. Employee sentiment is positive. Overall, Shopify provides growth opportunities in a supportive environment.",
+    "metrics": {
+      "Average Tenure (years)": 3.5,
+      "Annual Attrition Rate (%)": 13.2,
+      "Engagement Score (/5)": 4.3,
+      "Glassdoor Rating (/5)": 4.2,
+      "Satisfaction %": 82
+    },
+    "positive_feedback": ["Creative freedom", "Collaborative environment", "Opportunities to learn", "Supportive leadership"],
+    "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
+    "highlights": ["Employees enjoy creative freedom.", "Collaboration is encouraged.", "Workload management could improve."]
   }
 }
