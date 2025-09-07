@@ -1,67 +1,84 @@
 import streamlit as st
 import requests
-from textblob import TextBlob
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
+from textblob import TextBlob
 
 # -----------------------------
-# Replace with your NewsAPI.org key
-NEWS_API_KEY = "YOUR_NEWSAPI_KEY"
+# Function to fetch news from NewsData.io
 # -----------------------------
+def fetch_news(company, api_key):
+    url = f"https://newsdata.io/api/1/news?apikey={api_key}&q={company}&language=en"
+    response = requests.get(url)
 
-# Function to fetch news articles about the company
-def fetch_news(company_name):
-    url = "https://newsapi.org/v2/everything"
-    query = f"{company_name} employee OR culture OR workplace OR attrition"
-    params = {
-        "q": query,
-        "language": "en",
-        "pageSize": 10,  # number of articles
-        "apiKey": NEWS_API_KEY
-    }
-    try:
-        response = requests.get(url, params=params)
+    if response.status_code == 200:
         data = response.json()
-        news_texts = [article.get('description', '') for article in data.get('articles', []) if article.get('description')]
-        return news_texts
-    except:
-        return []
-
-# ----------------------------- Streamlit UI -----------------------------
-st.title("HR Due Diligence Tool - Live Data (NewsAPI.org)")
-
-company_name = st.text_input("Enter company name:")
-
-if company_name:
-    # ----------------- Fetch News -----------------
-    news_texts = fetch_news(company_name)
-    
-    st.subheader("Fetched News Articles")
-    if news_texts:
-        for idx, article in enumerate(news_texts, 1):
-            st.write(f"{idx}. {article}")
+        articles = data.get("results", [])
+        texts = [a.get("title", "") + " " + a.get("description", "") for a in articles if a]
+        return texts, articles
     else:
-        st.write("No news articles found.")
+        return [], []
 
-    # ----------------- Combine Text for Analysis -----------------
-    combined_text = " ".join(news_texts)
-
-    if combined_text.strip():  # Only process if there is text
-        # ----------------- Sentiment Analysis -----------------
-        sentiment_score = TextBlob(combined_text).sentiment.polarity
-        st.subheader("Overall Sentiment Score")
-        st.write(sentiment_score)
-
-        # ----------------- Word Cloud -----------------
-        wordcloud = WordCloud(width=800, height=400, background_color='white').generate(combined_text)
-        plt.figure(figsize=(10,5))
-        plt.imshow(wordcloud, interpolation='bilinear')
-        plt.axis('off')
-        st.pyplot(plt)
-
-        # ----------------- Downloadable Report -----------------
-        report_text = f"Company: {company_name}\n\nSentiment Score: {sentiment_score}\n\nNews Articles:\n"
-        report_text += "\n".join(news_texts)
-        st.download_button("Download Report", report_text, file_name=f"{company_name}_HR_report.txt")
+# -----------------------------
+# Function for sentiment analysis
+# -----------------------------
+def analyze_sentiment(text):
+    blob = TextBlob(text)
+    polarity = blob.sentiment.polarity
+    if polarity > 0.1:
+        return "Positive"
+    elif polarity < -0.1:
+        return "Negative"
     else:
-        st.write("No news text available. Word cloud and sentiment analysis cannot be generated.")
+        return "Neutral"
+
+# -----------------------------
+# Streamlit App
+# -----------------------------
+st.title("🕵️ HR Due Diligence Company Analysis Tool")
+
+# User inputs
+company = st.text_input("Enter company name:", "Reliance Industries")
+api_key = st.text_input("Enter your NewsData.io API Key", type="password")
+
+if st.button("Fetch & Analyze"):
+    if not api_key:
+        st.error("Please enter your NewsData.io API key.")
+    else:
+        st.info(f"Fetching latest news for: {company} ...")
+        news_texts, articles = fetch_news(company, api_key)
+
+        if news_texts:
+            combined_text = " ".join(news_texts)
+
+            # Word Cloud
+            wordcloud = WordCloud(width=800, height=400, background_color='white').generate(combined_text)
+
+            st.subheader("Word Cloud of Company Mentions")
+            fig, ax = plt.subplots()
+            ax.imshow(wordcloud, interpolation="bilinear")
+            ax.axis("off")
+            st.pyplot(fig)
+
+            # Sentiment Summary
+            sentiments = [analyze_sentiment(text) for text in news_texts]
+            pos = sentiments.count("Positive")
+            neg = sentiments.count("Negative")
+            neu = sentiments.count("Neutral")
+
+            st.subheader("📊 Sentiment Analysis Summary")
+            st.write(f"✅ Positive: {pos}")
+            st.write(f"⚠️ Negative: {neg}")
+            st.write(f"➖ Neutral: {neu}")
+
+            # Show Articles with Sentiment
+            st.subheader("📰 Latest News Articles with Sentiment")
+            for i, article in enumerate(articles[:10], 1):  # show top 10
+                title = article.get("title", "No Title")
+                description = article.get("description", "")
+                link = article.get("link", "#")
+                sentiment = analyze_sentiment(title + " " + description)
+                st.markdown(f"**{i}. [{title}]({link})**  \nSentiment: **{sentiment}**  \n{description}")
+
+        else:
+            st.warning("No news found. Try another company name or check your API key.")
