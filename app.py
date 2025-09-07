@@ -49,15 +49,25 @@ def generate_dummy_data(company_name):
 st.set_page_config(page_title="HR Due Diligence Dashboard", layout="wide")
 
 # ------------------------
-# Sidebar for Company Input
+# Company Input
 # ------------------------
-st.sidebar.title("HR Due Diligence Tool")
-company_name = st.sidebar.text_input("Enter Company Name:", "").strip()
-
 st.title("HR Due Diligence Dashboard")
+company_name = st.text_input("Enter Company Name:", "").strip()
 
 if company_name:
     company_info = company_data.get(company_name, generate_dummy_data(company_name))
+
+    # ------------------------
+    # Summary Section
+    # ------------------------
+    st.subheader("Summary")
+    summary_text = (
+        f"{company_name} has a workforce culture that emphasizes collaboration and innovation. "
+        f"Overall employee satisfaction is {company_info['reputation']['employee_satisfaction']} "
+        f"with average ratings of {company_info['reputation']['ratings']}. "
+        f"Key cultural attributes include {company_info.get('culture', 'N/A')}."
+    )
+    st.info(summary_text)
 
     # ------------------------
     # Top Metrics
@@ -69,39 +79,26 @@ if company_name:
     col3.metric("Ratings", company_info["reputation"]["ratings"])
 
     # ------------------------
-    # Culture & Sentiment Word Cloud (small)
+    # Culture & Sentiment Word Cloud
     # ------------------------
-    st.subheader("Culture & Sentiment")
-    col_wc, col_dummy = st.columns([2, 1])  # smaller wordcloud, empty column for spacing
+    st.subheader("Culture & Sentiment Word Cloud")
     culture_text = company_info.get("culture", "")
     if culture_text:
         wordcloud = WordCloud(width=400, height=200, background_color="white").generate(culture_text)
         plt.figure(figsize=(6, 3))
         plt.imshow(wordcloud, interpolation="bilinear")
         plt.axis("off")
-        col_wc.pyplot(plt)
+        st.pyplot(plt)
     else:
-        col_wc.write("No culture text available.")
+        st.write("No culture text available.")
 
     # ------------------------
-    # Highlights & Sample Feedback side by side
+    # Employee Feedback in two columns
     # ------------------------
-    st.subheader("HR Insights")
-    col_high, col_feedback = st.columns(2)
+    st.subheader("Employee Feedback")
+    col_feedback1, col_feedback2 = st.columns(2)
 
-    # Key Highlights
-    highlights = [
-        f"{company_name} has a collaborative and supportive culture.",
-        f"{company_name} focuses on innovation and employee growth.",
-        f"{company_name} maintains fair performance evaluations.",
-        f"{company_name} encourages learning and development."
-    ]
-    col_high.markdown("**Key Highlights**")
-    for h in random.sample(highlights, k=3):
-        col_high.success(h)
-
-    # Sample Feedback in expanders
-    sample_feedbacks = [
+    feedback_list = [
         f"{company_name} provides great career growth opportunities.",
         f"{company_name} has a supportive management team.",
         f"Work-life balance at {company_name} is good.",
@@ -109,7 +106,10 @@ if company_name:
         f"{company_name} values diversity and inclusion.",
         f"{company_name} rewards high performance appropriately."
     ]
-    col_feedback.markdown("**Sample Employee Feedback**")
-    for fb in random.sample(sample_feedbacks, k=3):
-        with col_feedback.expander("View Feedback"):
-            st.info(fb)
+
+    feedback_sample = random.sample(feedback_list, k=4)
+    for i, fb in enumerate(feedback_sample):
+        if i % 2 == 0:
+            col_feedback1.write(f"- {fb}")
+        else:
+            col_feedback2.write(f"- {fb}")
