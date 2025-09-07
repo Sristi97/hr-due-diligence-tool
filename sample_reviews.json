@@ -1,95 +1,83 @@
 {
+  "Google": {
+    "summary": "Google is widely recognized for its innovative and employee-friendly culture. It offers ample learning opportunities, strong collaboration, and competitive benefits. However, work pressure and internal competition are sometimes cited as challenges.",
+    "metrics": {
+      "Average Tenure (years)": 4.2,
+      "Annual Attrition Rate (%)": 10.5,
+      "Engagement Score (/5)": 4.6,
+      "Glassdoor Rating (/5)": 4.4,
+      "Satisfaction %": 92
+    },
+    "positive_feedback": [
+      "Innovative projects and exposure to cutting-edge tech.",
+      "Flexible work environment with hybrid options.",
+      "Great compensation and perks.",
+      "Inclusive and diverse teams."
+    ],
+    "negative_feedback": [
+      "High competition between teams.",
+      "Work-life balance issues in some functions.",
+      "Bureaucratic processes at scale.",
+      "Performance pressure is intense."
+    ],
+    "highlights": [
+      "High satisfaction scores indicate strong employee morale.",
+      "Attrition is relatively low compared to industry average.",
+      "Innovation and collaboration are consistently praised."
+    ]
+  },
+  "Microsoft": {
+    "summary": "Microsoft has transformed its culture into one that emphasizes collaboration, inclusion, and growth mindset. Employees value the leadership vision and flexibility, though workload and bureaucracy are recurring pain points.",
+    "metrics": {
+      "Average Tenure (years)": 5.1,
+      "Annual Attrition Rate (%)": 8.9,
+      "Engagement Score (/5)": 4.4,
+      "Glassdoor Rating (/5)": 4.3,
+      "Satisfaction %": 88
+    },
+    "positive_feedback": [
+      "Supportive management and career development programs.",
+      "Focus on diversity and inclusion.",
+      "Strong learning and skilling initiatives.",
+      "Excellent work-life balance in most functions."
+    ],
+    "negative_feedback": [
+      "Bureaucratic decision-making slows execution.",
+      "Workload spikes during product release cycles.",
+      "Promotions may feel slow in certain teams.",
+      "Compensation below peers in some geographies."
+    ],
+    "highlights": [
+      "Employee engagement scores show strong leadership trust.",
+      "Attrition levels are under control, indicating retention success.",
+      "Learning culture stands out as a differentiator."
+    ]
+  },
   "Reliance": {
-    "summary": "Reliance is seen as a high-performing company with a strong emphasis on innovation, scale, and employee benefits. However, work-life balance and internal bureaucracy can be areas of concern.",
+    "summary": "Reliance is a fast-growing conglomerate with a focus on innovation and scale. Employees appreciate growth opportunities and leadership vision, but work-life balance and hierarchy are often mentioned as concerns.",
     "metrics": {
       "Average Tenure (years)": 4.5,
       "Annual Attrition Rate (%)": 12.3,
       "Engagement Score (/5)": 4.2,
-      "Glassdoor Rating (/5)": 3.9
+      "Glassdoor Rating (/5)": 3.9,
+      "Satisfaction %": 76
     },
-    "feedback_positive": [
-      "Great opportunities for career growth and exposure to large-scale projects.",
-      "Strong leadership and financial stability.",
-      "Good employee benefits and market reputation."
+    "positive_feedback": [
+      "Exposure to large-scale projects and impact.",
+      "Fast-paced growth and career advancement.",
+      "Strong leadership vision.",
+      "Learning opportunities across industries."
     ],
-    "feedback_negative": [
-      "Work-life balance can be challenging due to workload.",
-      "Decision-making can be slow due to bureaucracy.",
-      "Too much hierarchy at times."
+    "negative_feedback": [
+      "Work-life balance is often compromised.",
+      "Hierarchical decision-making structure.",
+      "Processes are sometimes rigid and outdated.",
+      "High expectations lead to employee stress."
     ],
     "highlights": [
-      "Market leader in multiple industries.",
-      "Known for large-scale innovation and expansion.",
-      "High learning curve for employees."
-    ],
-    "culture_keywords": {
-      "Innovation": 30,
-      "Growth": 25,
-      "Hierarchy": 15,
-      "Work-life Balance": 10,
-      "Stability": 20
-    }
-  },
-  "TCS": {
-    "summary": "TCS is recognized for job security, structured processes, and global opportunities. The culture is professional, though growth can sometimes be slower due to scale.",
-    "metrics": {
-      "Average Tenure (years)": 6.1,
-      "Annual Attrition Rate (%)": 10.5,
-      "Engagement Score (/5)": 4.0,
-      "Glassdoor Rating (/5)": 3.8
-    },
-    "feedback_positive": [
-      "Excellent job security and brand recognition.",
-      "Global mobility and diverse projects.",
-      "Strong training programs for freshers."
-    ],
-    "feedback_negative": [
-      "Compensation growth can be slower than peers.",
-      "Processes can feel rigid and bureaucratic.",
-      "Limited flexibility in some roles."
-    ],
-    "highlights": [
-      "Top global IT services provider.",
-      "Strong presence in BFSI and retail sectors.",
-      "Deep focus on employee training and skilling."
-    ],
-    "culture_keywords": {
-      "Stability": 35,
-      "Learning": 25,
-      "Hierarchy": 15,
-      "Process-Oriented": 15,
-      "Global Exposure": 10
-    }
-  },
-  "Infosys": {
-    "summary": "Infosys is known for its strong ethical values, client delivery focus, and structured career paths. While stability is a plus, bureaucracy and slower promotions can frustrate employees.",
-    "metrics": {
-      "Average Tenure (years)": 5.4,
-      "Annual Attrition Rate (%)": 14.0,
-      "Engagement Score (/5)": 3.9,
-      "Glassdoor Rating (/5)": 3.7
-    },
-    "feedback_positive": [
-      "Strong ethical foundation and company values.",
-      "Good learning opportunities with structured training.",
-      "Strong brand and global presence."
-    ],
-    "feedback_negative": [
-      "Promotions can be slow and hierarchical.",
-      "Workload in projects may not always be balanced.",
-      "Compensation growth lower than market leaders."
-    ],
-    "highlights": [
-      "Respected brand in IT services.",
-      "Structured processes and delivery excellence.",
-      "Focused on sustainability and corporate governance."
-    ],
-    "culture_keywords": {
-      "Ethics": 30,
-      "Learning": 20,
-      "Hierarchy": 20,
-      "Stability": 20,
-      "Governance": 10
-    }
+      "Reliance offers rapid career growth but demands long hours.",
+      "Attrition is higher than global peers, signaling retention challenges.",
+      "Leadership vision drives employee motivation despite challenges."
+    ]
   }
 }
