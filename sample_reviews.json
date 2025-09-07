@@ -1,19 +1,36 @@
 {
-  "generic_reviews": [
-    "Fast-paced and high-pressure work environment.",
-    "Strong focus on hierarchy, limited flexibility in decision making.",
-    "Good learning opportunities but work-life balance can be challenging.",
-    "Stable company with long-term career prospects.",
-    "Salary and perks are competitive compared to peers.",
-    "Supportive managers but bureaucracy can slow things down.",
-    "Collaborative work culture with emphasis on teamwork.",
-    "Innovation encouraged but processes can be rigid.",
-    "Diverse workforce with opportunities for growth.",
-    "Employees appreciate clear communication from leadership.",
-    "Focus on continuous learning and professional development.",
-    "Teams are supportive and encourage knowledge sharing.",
-    "Employee recognition programs boost morale.",
-    "Open communication channels between leadership and teams.",
-    "Flexible work arrangements available depending on the team."
+  "news": {
+    "data": [
+      {"title": "Company continues to focus on innovation and employee development", "pubDate": "2025-09-07"},
+      {"title": "Leadership initiatives enhance organizational culture and collaboration", "pubDate": "2025-09-05"},
+      {"title": "Sustainability and corporate social responsibility programs gain momentum", "pubDate": "2025-09-03"}
+    ]
+  },
+  "google_snippets": [
+    "Strong culture of innovation and teamwork",
+    "Focus on employee engagement and growth",
+    "Inclusive and collaborative environment",
+    "Recognition and rewards for high performance"
+  ],
+  "reputation": {
+    "reviews": {
+      "message": "This is demo data showcasing typical employee reviews"
+    },
+    "employee_satisfaction": {
+      "score": 4.2,
+      "comment": "Employees generally report high satisfaction with work-life balance and career development opportunities"
+    },
+    "ratings": {
+      "overall": 4.0,
+      "management": 4.1,
+      "culture": 4.3,
+      "work_life_balance": 4.0
+    },
+    "Glassdoor": {
+      "message": "Demo data: actual Glassdoor reviews are not displayed here"
+    }
+  },
+  "culture_wordcloud": [
+    "Innovation", "Collaboration", "Diversity", "Growth", "Teamwork", "Engagement", "Recognition"
   ]
 }
