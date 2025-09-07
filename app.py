@@ -1,85 +1,57 @@
-import json
 import streamlit as st
+import json
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
-# -----------------------
-# App Config
-# -----------------------
-st.set_page_config(page_title="HR Due Diligence Tool", layout="wide")
+# --- Load sample JSON data ---
+with open("sample_reviews.json") as f:
+    data = json.load(f)
+
+# --- Page Configuration ---
+st.set_page_config(
+    page_title="HR Due Diligence Dashboard",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# --- Title ---
 st.title("HR Due Diligence Dashboard")
 
-# -----------------------
-# Load Sample JSON
-# -----------------------
-sample_file = "sample_reviews.json"
+# --- Company Input ---
+company_input = st.text_input("Enter Company Name:", value="Reliance").strip()
 
-try:
-    with open(sample_file, "r") as f:
-        data = json.load(f)
-except Exception as e:
-    st.error(f"Could not load sample JSON: {e}")
-    data = {}
-
-# -----------------------
-# Input: Company Selection
-# -----------------------
-company_name = st.selectbox("Select Company", list(data.keys()))
-
-company_data = data.get(company_name, {})
-
-# -----------------------
-# Display News
-# -----------------------
-st.subheader("News / Updates")
-news = company_data.get("news", {}).get("data", [])
-if news:
-    for item in news:
-        st.markdown(f"**{item.get('title', 'No Title')}**")
-        st.write(item.get("description", "No Description"))
+if company_input in data:
+    company_data = data[company_input]
+    
+    # --- Reputation Section ---
+    st.subheader("Reputation & Ratings")
+    rep = company_data["reputation"]
+    st.metric("Total Reviews", rep["reviews"])
+    st.metric("Employee Satisfaction", rep["employee_satisfaction"])
+    st.metric("Overall Ratings", rep["ratings"])
+    st.metric("Glassdoor Rating", rep["Glassdoor"])
+    
+    # --- Culture / Sentiment Word Cloud ---
+    st.subheader("Culture / Sentiment Word Cloud")
+    words = company_data.get("culture_sentiment", [])
+    if words:
+        text = " ".join(words)
+        wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
+        plt.figure(figsize=(10,5))
+        plt.imshow(wordcloud, interpolation='bilinear')
+        plt.axis("off")
+        st.pyplot(plt)
+    else:
+        st.info("No text available for word cloud.")
 else:
-    st.write("No news available.")
-
-# -----------------------
-# Display Google Snippets
-# -----------------------
-st.subheader("Google Snippets")
-google_snippets = company_data.get("google_snippets", {"message": "No data available"})
-st.json(google_snippets)
-
-# -----------------------
-# Display Reputation
-# -----------------------
-st.subheader("Reputation / Reviews")
-reputation = company_data.get("reputation", {})
-st.json(reputation)
-
-# -----------------------
-# Word Cloud: Culture / Sentiment
-# -----------------------
-st.subheader("Culture / Sentiment Word Cloud")
-
-# Combine all text available in news + reputation for word cloud
-text_for_wordcloud = ""
-for item in news:
-    text_for_wordcloud += " " + item.get("title", "") + " " + item.get("description", "")
-
-# Add reputation texts if available
-for key, value in reputation.items():
-    text_for_wordcloud += " " + " ".join(str(v) for v in value.values())
-
-if not text_for_wordcloud.strip():
-    text_for_wordcloud = "Work culture Employee engagement HR satisfaction Benefits Leadership Teamwork Innovation"
-
-wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text_for_wordcloud)
-
-fig, ax = plt.subplots(figsize=(10, 5))
-ax.imshow(wordcloud, interpolation='bilinear')
-ax.axis("off")
-st.pyplot(fig)
-
-# -----------------------
-# Display Raw JSON Data
-# -----------------------
-st.subheader("Raw JSON Data")
-st.json(company_data)
+    st.warning(f"No data available for '{company_input}'. Showing placeholder data.")
+    
+    # --- Placeholder Data ---
+    st.subheader("Reputation & Ratings")
+    st.metric("Total Reviews", "N/A")
+    st.metric("Employee Satisfaction", "N/A")
+    st.metric("Overall Ratings", "N/A")
+    st.metric("Glassdoor Rating", "N/A")
+    
+    st.subheader("Culture / Sentiment Word Cloud")
+    st.info("No text available for word cloud.")
