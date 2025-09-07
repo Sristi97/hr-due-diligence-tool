@@ -79,20 +79,6 @@ if company_name:
     col3.metric("Ratings", company_info["reputation"]["ratings"])
 
     # ------------------------
-    # Culture & Sentiment Word Cloud
-    # ------------------------
-    st.subheader("Culture & Sentiment Word Cloud")
-    culture_text = company_info.get("culture", "")
-    if culture_text:
-        wordcloud = WordCloud(width=400, height=200, background_color="white").generate(culture_text)
-        plt.figure(figsize=(6, 3))
-        plt.imshow(wordcloud, interpolation="bilinear")
-        plt.axis("off")
-        st.pyplot(plt)
-    else:
-        st.write("No culture text available.")
-
-    # ------------------------
     # Employee Feedback in two columns
     # ------------------------
     st.subheader("Employee Feedback")
@@ -113,3 +99,17 @@ if company_name:
             col_feedback1.write(f"- {fb}")
         else:
             col_feedback2.write(f"- {fb}")
+
+    # ------------------------
+    # Culture & Sentiment Word Cloud at the bottom
+    # ------------------------
+    st.subheader("Culture & Sentiment Word Cloud")
+    culture_text = company_info.get("culture", "")
+    if culture_text:
+        wordcloud = WordCloud(width=350, height=150, background_color="white").generate(culture_text)
+        plt.figure(figsize=(5, 2.5))
+        plt.imshow(wordcloud, interpolation="bilinear")
+        plt.axis("off")
+        st.pyplot(plt)
+    else:
+        st.write("No culture text available.")
