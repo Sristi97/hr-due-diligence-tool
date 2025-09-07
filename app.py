@@ -4,7 +4,7 @@ from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
 # ------------------------
-# Sample Data (dummy JSON)
+# Sample Data
 # ------------------------
 company_data = {
     "Reliance": {
@@ -26,7 +26,7 @@ company_data = {
 }
 
 # ------------------------
-# Function to generate dummy data if company not in JSON
+# Dummy data generator
 # ------------------------
 def generate_dummy_data(company_name):
     dummy_reviews = ["4.0/5", "Good", "3.8/5", "3.5/5", "Excellent", "Average"]
@@ -44,26 +44,23 @@ def generate_dummy_data(company_name):
     }
 
 # ------------------------
-# Streamlit App
+# Streamlit Config
 # ------------------------
 st.set_page_config(page_title="HR Due Diligence Dashboard", layout="wide")
-st.title("HR Due Diligence Dashboard")
+st.markdown("<h1 style='text-align: center;'>HR Due Diligence Dashboard</h1>", unsafe_allow_html=True)
 
-# Initialize session state
-if "company_name" not in st.session_state:
-    st.session_state.company_name = ""
-
-# Input for company name
-company_name = st.text_input("Enter Company Name:", value=st.session_state.company_name).strip()
-st.session_state.company_name = company_name
+# ------------------------
+# Company Input
+# ------------------------
+company_name = st.text_input("Enter Company Name:", "").strip()
 
 if company_name:
     company_info = company_data.get(company_name, generate_dummy_data(company_name))
 
     # ------------------------
-    # Dashboard metrics
+    # Key Metrics
     # ------------------------
-    st.subheader(f"Company: {company_name}")
+    st.markdown("### Key Metrics")
     col1, col2, col3 = st.columns(3)
     col1.metric("Reviews", company_info["reputation"]["reviews"])
     col2.metric("Employee Satisfaction", company_info["reputation"]["employee_satisfaction"])
@@ -72,7 +69,8 @@ if company_name:
     # ------------------------
     # Culture & Sentiment Word Cloud
     # ------------------------
-    st.subheader("Culture & Sentiment Word Cloud")
+    st.markdown("---")
+    st.markdown("### Culture & Sentiment")
     culture_text = company_info.get("culture", "")
     if culture_text:
         wordcloud = WordCloud(width=800, height=400, background_color="white").generate(culture_text)
@@ -84,9 +82,24 @@ if company_name:
         st.write("No culture text available.")
 
     # ------------------------
+    # Key Highlights
+    # ------------------------
+    st.markdown("---")
+    st.markdown("### Key Highlights")
+    highlights = [
+        f"{company_name} has a collaborative and supportive culture.",
+        f"{company_name} focuses on innovation and employee growth.",
+        f"{company_name} maintains fair performance evaluations.",
+        f"{company_name} encourages learning and development."
+    ]
+    for h in random.sample(highlights, k=3):
+        st.success(h)
+
+    # ------------------------
     # Sample Employee Feedback
     # ------------------------
-    st.subheader("Sample Employee Feedback")
+    st.markdown("---")
+    st.markdown("### Sample Employee Feedback")
     sample_feedbacks = [
         f"{company_name} provides great career growth opportunities.",
         f"{company_name} has a supportive management team.",
