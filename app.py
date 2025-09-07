@@ -3,7 +3,6 @@ import random
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import pandas as pd
-import altair as alt
 
 # ---------------------------
 # Dummy Data Generators
@@ -12,7 +11,6 @@ import altair as alt
 def generate_summary(company):
     sentiment_score = random.random()
     
-    # Tailor strengths/weaknesses/culture based on company type
     if "tech" in company.lower():
         strengths = ["innovation-driven projects", "continuous learning", "modern technology stack", "collaborative teams"]
         weaknesses = ["rapid changes can cause confusion", "tight deadlines", "long hours during sprints"]
@@ -91,7 +89,6 @@ def generate_highlights(sentiment_score):
     return random.sample(highlights, k=4)
 
 def generate_fake_reviews(company):
-    # Simulate “scraping” reviews from multiple sites
     sources = ["Glassdoor", "Indeed", "LinkedIn"]
     reviews = []
     sample_text = [
@@ -124,16 +121,20 @@ if company:
     highlights = generate_highlights(sentiment_score)
     fake_reviews = generate_fake_reviews(company)
     
-    # Summary
+    # Executive Summary
     st.subheader("Executive Summary")
     st.write(summary)
     
-    # Key Metrics Table (styled)
+    # Key HR Metrics as Cards
     st.subheader("Key HR Metrics")
-    metrics_df = pd.DataFrame(metrics.items(), columns=["Metric", "Value"])
-    st.dataframe(metrics_df.style.format({"Value": "{:.1f}" if isinstance(metrics_df["Value"][0], float) else "{}"}), height=200)
+    col1, col2, col3, col4, col5 = st.columns(5)
+    col1.metric("Number of Reviews", metrics["Number of Reviews"])
+    col2.metric("Attrition %", f"{metrics['Attrition %']}%")
+    col3.metric("Average Tenure", f"{metrics['Average Tenure (yrs)']} yrs")
+    col4.metric("Satisfaction %", f"{metrics['Satisfaction %']}%")
+    col5.metric("Overall Rating", metrics["Overall Rating"])
     
-    # Employee Feedback Table & Chart
+    # Employee Feedback
     st.subheader("Employee Feedback")
     fb_col1, fb_col2 = st.columns(2)
     fb_col1.markdown("**Positive Feedback**")
@@ -143,26 +144,12 @@ if company:
     for f in neg_feedback:
         fb_col2.markdown(f"- {f}")
     
-    # Feedback Overview Chart using Altair
-    feedback_df = pd.DataFrame({
-        "Feedback Type": ["Positive", "Negative"],
-        "Count": [len(pos_feedback), len(neg_feedback)]
-    })
-    st.subheader("Feedback Overview")
-    chart = alt.Chart(feedback_df).mark_bar().encode(
-        x=alt.X('Feedback Type', sort=None),
-        y='Count',
-        color='Feedback Type',
-        tooltip=['Feedback Type','Count']
-    ).properties(width=400, height=250)
-    st.altair_chart(chart)
-    
     # Highlights
     st.subheader("Key Insights / Highlights")
     for h in highlights:
         st.markdown(f"- {h}")
     
-    # Culture / Word Cloud
+    # Culture Word Cloud
     st.subheader("Culture & Sentiment")
     fig, ax = plt.subplots(figsize=(10,4))
     wc = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(culture_keywords)
@@ -170,14 +157,15 @@ if company:
     ax.axis("off")
     st.pyplot(fig)
     
-    # Fake Review Snippets
+    # Simulated Review Snippets
     st.subheader("Simulated Review Snippets (from multiple sources)")
     review_df = pd.DataFrame(fake_reviews)
     st.dataframe(review_df, height=200)
     
     # Downloadable Report
     st.subheader("Download Report")
-    report_text = f"Company: {company}\n\nSummary:\n{summary}\n\nMetrics:\n{metrics_df.to_string(index=False)}"
+    report_text = f"Company: {company}\n\nSummary:\n{summary}\n\nMetrics:\n" \
+                  f"{pd.DataFrame(metrics.items(), columns=['Metric','Value']).to_string(index=False)}"
     st.download_button("Download Report as Text", report_text, file_name=f"{company}_HR_Report.txt")
     
 else:
