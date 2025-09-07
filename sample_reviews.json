@@ -389,6 +389,74 @@
     "positive_feedback": ["Technical excellence", "Opportunities to learn", "Collaborative teams", "Innovation-driven environment"],
     "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
     "highlights": ["Employees value technical work.", "Collaboration is encouraged.", "Workload can be a challenge."]
+  }, "Deloitte": {
+    "summary": "Deloitte emphasizes professional development, collaborative culture, and client-focused work. While workload is high at times, employees value the mentorship and learning opportunities. Overall, Deloitte offers strong career growth in a dynamic environment.",
+    "metrics": {
+      "Average Tenure (years)": 4.6,
+      "Annual Attrition Rate (%)": 12.1,
+      "Engagement Score (/5)": 4.5,
+      "Glassdoor Rating (/5)": 4.3,
+      "Satisfaction %": 86
+    },
+    "positive_feedback": ["Mentorship programs", "Collaborative teams", "Opportunities to learn", "Supportive leadership"],
+    "negative_feedback": ["High workload", "Long client hours", "Frequent travel requirements", "Occasional unclear project expectations"],
+    "highlights": [
+      "Employees appreciate structured career development programs.",
+      "Collaboration across teams is strong and valued.",
+      "Workload can be challenging but learning opportunities offset pressure."
+    ]
+  },
+  "PwC": {
+    "summary": "PwC fosters a structured and learning-oriented environment. Employees enjoy strong collaboration and professional development, though workload can be intense. Overall, PwC provides steady career growth with exposure to global clients.",
+    "metrics": {
+      "Average Tenure (years)": 4.3,
+      "Annual Attrition Rate (%)": 11.7,
+      "Engagement Score (/5)": 4.4,
+      "Glassdoor Rating (/5)": 4.2,
+      "Satisfaction %": 85
+    },
+    "positive_feedback": ["Structured processes", "Learning opportunities", "Supportive leadership", "Global exposure"],
+    "negative_feedback": ["High workload during busy season", "Promotion timelines are slow", "Limited recognition for some teams", "Internal communication gaps"],
+    "highlights": [
+      "Employees value structured processes and mentorship.",
+      "Global client exposure provides excellent learning opportunities.",
+      "Workload is high, but teamwork helps manage pressure."
+    ]
+  },
+  "EY": {
+    "summary": "EY emphasizes professional growth, client-focus, and collaboration. Employees enjoy learning opportunities and strong support, though high workload and internal politics are noted. Overall, EY provides rewarding career development experiences.",
+    "metrics": {
+      "Average Tenure (years)": 4.1,
+      "Annual Attrition Rate (%)": 12.4,
+      "Engagement Score (/5)": 4.3,
+      "Glassdoor Rating (/5)": 4.1,
+      "Satisfaction %": 83
+    },
+    "positive_feedback": ["Career development programs", "Supportive leadership", "Collaborative environment", "Opportunities to learn"],
+    "negative_feedback": ["High workload during project deadlines", "Occasional lack of transparency in promotions", "Internal politics between teams", "Long hours on client projects"],
+    "highlights": [
+      "Employees appreciate opportunities to work on challenging client projects.",
+      "Collaboration is encouraged across teams.",
+      "Workload can be heavy, but learning opportunities are strong."
+    ]
+  },
+  "KPMG": {
+    "summary": "KPMG values collaboration, professional growth, and client excellence. Employees report strong support and mentorship, though high workload and recognition issues exist. Overall, KPMG provides a supportive environment for career advancement.",
+    "metrics": {
+      "Average Tenure (years)": 4.2,
+      "Annual Attrition Rate (%)": 12.0,
+      "Engagement Score (/5)": 4.3,
+      "Glassdoor Rating (/5)": 4.2,
+      "Satisfaction %": 84
+    },
+    "positive_feedback": ["Collaborative teams", "Learning opportunities", "Supportive leadership", "Career development programs"],
+    "negative_feedback": ["High workload during audit season", "Delayed recognition of achievements", "Internal politics in some departments", "Tight client deadlines"],
+    "highlights": [
+      "Employees value teamwork and knowledge sharing.",
+      "Career development initiatives are well-received.",
+      "Workload can be challenging, but mentorship programs help."
+    ]
   }
 }
+
 
