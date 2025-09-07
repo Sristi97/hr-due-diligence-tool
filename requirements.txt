@@ -2,3 +2,5 @@ streamlit
 nltk
 wordcloud
 matplotlib
+wikipedia
+requests
