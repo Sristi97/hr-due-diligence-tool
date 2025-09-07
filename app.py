@@ -1,70 +1,67 @@
 import streamlit as st
-import pandas as pd
 import random
 import json
+import os
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 from fpdf import FPDF
 
 # ---------------------------
-# Load Company Data
+# Load JSON Data
 # ---------------------------
-def load_company_data():
-    try:
-        with open("sample_reviews.json", "r") as f:
-            return json.load(f)
-    except Exception:
-        return {}
+DATA_FILE = "sample_reviews.json"
 
-COMPANY_DB = load_company_data()
+if os.path.exists(DATA_FILE):
+    with open(DATA_FILE, "r") as f:
+        COMPANY_DATA = json.load(f)
+else:
+    COMPANY_DATA = {}
 
 # ---------------------------
-# Fallback Generators
+# Dummy Generators
 # ---------------------------
-def generate_summary(company):
-    strengths = ["supportive management", "flexible work hours", "innovative culture", "strong training programs", "team collaboration", "diverse teams"]
-    weaknesses = ["slow decision-making", "limited recognition", "high workload", "training gaps", "internal politics", "inconsistent policies"]
-    culture_aspects = ["team collaboration", "innovation-driven environment", "continuous learning", "employee engagement programs"]
+def generate_random_summary(company):
+    strengths = ["supportive management", "flexible work hours", "innovative culture",
+                 "strong training programs", "team collaboration", "diverse teams"]
+    weaknesses = ["slow decision-making", "limited recognition", "high workload",
+                  "training gaps", "internal politics", "inconsistent policies"]
+    culture_aspects = ["team collaboration", "innovation-driven environment",
+                       "continuous learning", "employee engagement programs"]
 
-    return (
-        f"{company} has several strengths including {random.choice(strengths)} and {random.choice(strengths)}. "
-        f"The company culture emphasizes {random.choice(culture_aspects)}. "
-        f"Areas for improvement include {random.choice(weaknesses)} and {random.choice(weaknesses)}. "
-        f"Employee sentiment appears {'generally positive' if random.random() > 0.3 else 'mixed'}, with feedback highlighting both achievements and challenges. "
-        f"Overall, {company} presents an environment where employees experience growth opportunities while facing some operational challenges."
+    summary = (
+        f"{company} has several strengths including {random.choice(strengths)} "
+        f"and {random.choice(strengths)}. The company culture emphasizes "
+        f"{random.choice(culture_aspects)}. Areas for improvement include "
+        f"{random.choice(weaknesses)} and {random.choice(weaknesses)}. "
+        f"Employee sentiment appears {'generally positive' if random.random() > 0.3 else 'mixed'}, "
+        f"with feedback highlighting both achievements and challenges. Overall, {company} "
+        f"presents an environment where employees experience growth opportunities while facing some operational challenges."
     )
+    return summary
 
-def generate_metrics():
+def generate_random_metrics():
     return {
         "Average Tenure (years)": round(random.uniform(2, 8), 1),
-        "Annual Attrition Rate (%)": round(random.uniform(8, 25), 1),
-        "Engagement Score (/5)": round(random.uniform(3, 5), 1),
-        "Glassdoor Rating (/5)": round(random.uniform(3, 5), 1),
+        "Annual Attrition Rate (%)": round(random.uniform(5, 25), 1),
+        "Engagement Score (/5)": round(random.uniform(3.0, 5.0), 1),
+        "Glassdoor Rating (/5)": round(random.uniform(2.5, 5.0), 1),
         "Satisfaction %": random.randint(60, 95)
     }
 
-def generate_feedback():
-    positive = [
-        "Supportive team culture",
-        "Opportunities to learn",
-        "Good work-life balance",
-        "Flexible hours",
-        "Strong leadership",
-        "Mentorship programs",
-        "Inclusive environment"
+def generate_random_feedback():
+    positive_feedback = [
+        "Supportive team culture", "Opportunities to learn", "Good work-life balance",
+        "Flexible hours", "Strong leadership", "Mentorship programs", "Inclusive environment"
     ]
-    negative = [
-        "High workload pressure",
-        "Limited recognition",
-        "Slow decision-making",
-        "Training gaps",
-        "Internal politics",
-        "Inconsistent policies",
-        "Promotion delays"
+    negative_feedback = [
+        "High workload pressure", "Limited recognition", "Slow decision-making",
+        "Training gaps", "Internal politics", "Inconsistent policies", "Promotion delays"
     ]
-    return random.sample(positive, k=4), random.sample(negative, k=4)
+    pos = random.sample(positive_feedback, k=4)
+    neg = random.sample(negative_feedback, k=4)
+    return pos, neg
 
-def generate_highlights():
+def generate_random_highlights():
     highlights = [
         "Employees appreciate collaborative work environment.",
         "Training programs are improving but still limited in reach.",
@@ -77,75 +74,73 @@ def generate_highlights():
     return random.sample(highlights, k=3)
 
 def generate_culture_keywords():
-    keywords = ["Innovation", "Collaboration", "Integrity", "Learning", "Accountability", "Diversity", "Empathy", "Agility", "Trust", "Communication"]
-    return {k: random.randint(5, 20) for k in keywords}
+    keywords = ["Innovation", "Collaboration", "Integrity", "Learning", "Accountability",
+                "Diversity", "Empathy", "Agility", "Trust", "Communication"]
+    word_freq = {k: random.randint(5, 20) for k in random.sample(keywords, k=len(keywords))}
+    return word_freq
 
-# ---------------------------
-# Generate Insights
-# ---------------------------
 def generate_insights(summary, metrics, pos_feedback, neg_feedback):
-    satisfaction = metrics.get("Satisfaction %", round(metrics.get("Engagement Score (/5)", 3.5) * 20))
-
-    insights = [
-        f"Based on available reviews, the overall employee satisfaction is around {satisfaction}%.",
-        f"Attrition rate stands at {metrics.get('Annual Attrition Rate (%)', 'N/A')}%, indicating {'stable retention' if metrics.get('Annual Attrition Rate (%)', 15) < 15 else 'possible retention challenges'}.",
-        f"Key positive aspects include {', '.join(pos_feedback[:2])}.",
-        f"However, employees often raise concerns about {', '.join(neg_feedback[:2])}.",
-        "Overall, the organization presents a balanced outlook with clear strengths and some improvement areas."
-    ]
-    return insights
+    return (
+        f"Based on available reviews, the overall employee satisfaction is around {metrics['Satisfaction %']}%. "
+        f"Positive sentiment is mainly driven by factors such as {pos_feedback[0].lower()} and {pos_feedback[1].lower()}. "
+        f"However, challenges like {neg_feedback[0].lower()} continue to impact perception. "
+        f"Attrition at {metrics['Annual Attrition Rate (%)']}% suggests retention should be monitored closely. "
+        f"Overall, the culture appears {'healthy and growth-oriented' if metrics['Satisfaction %'] > 75 else 'mixed, requiring management focus'}."
+    )
 
 # ---------------------------
-# PDF Export
+# PDF Generator
 # ---------------------------
 def create_pdf(company, summary, metrics, pos_feedback, neg_feedback, highlights, insights):
     pdf = FPDF()
     pdf.add_page()
-    pdf.set_font("Arial", "B", 16)
+    pdf.set_font("Arial", 'B', 16)
     pdf.cell(200, 10, f"HR Due Diligence Report: {company}", ln=True, align="C")
 
-    pdf.set_font("Arial", "", 12)
-    pdf.multi_cell(0, 10, f"\nExecutive Summary:\n{summary}")
+    pdf.set_font("Arial", '', 12)
+    pdf.ln(10)
+    pdf.multi_cell(0, 10, f"Executive Summary:\n{summary}")
 
     pdf.ln(5)
-    pdf.set_font("Arial", "B", 12)
-    pdf.cell(0, 10, "Key HR Metrics:", ln=True)
-    pdf.set_font("Arial", "", 12)
+    pdf.set_font("Arial", 'B', 12)
+    pdf.cell(0, 10, "Key HR Metrics", ln=True)
+    pdf.set_font("Arial", '', 12)
     for k, v in metrics.items():
         pdf.cell(0, 10, f"- {k}: {v}", ln=True)
 
     pdf.ln(5)
-    pdf.set_font("Arial", "B", 12)
-    pdf.cell(0, 10, "Positive Feedback:", ln=True)
-    pdf.set_font("Arial", "", 12)
+    pdf.set_font("Arial", 'B', 12)
+    pdf.cell(0, 10, "Positive Feedback", ln=True)
+    pdf.set_font("Arial", '', 12)
     for f in pos_feedback:
         pdf.cell(0, 10, f"- {f}", ln=True)
 
-    pdf.ln(5)
-    pdf.set_font("Arial", "B", 12)
-    pdf.cell(0, 10, "Negative Feedback:", ln=True)
-    pdf.set_font("Arial", "", 12)
+    pdf.ln(2)
+    pdf.set_font("Arial", 'B', 12)
+    pdf.cell(0, 10, "Negative Feedback", ln=True)
+    pdf.set_font("Arial", '', 12)
     for f in neg_feedback:
         pdf.cell(0, 10, f"- {f}", ln=True)
 
     pdf.ln(5)
-    pdf.set_font("Arial", "B", 12)
-    pdf.cell(0, 10, "Highlights:", ln=True)
-    pdf.set_font("Arial", "", 12)
+    pdf.set_font("Arial", 'B', 12)
+    pdf.cell(0, 10, "Highlights", ln=True)
+    pdf.set_font("Arial", '', 12)
     for h in highlights:
         pdf.cell(0, 10, f"- {h}", ln=True)
 
     pdf.ln(5)
-    pdf.set_font("Arial", "B", 12)
-    pdf.cell(0, 10, "Insights:", ln=True)
-    pdf.set_font("Arial", "", 12)
-    for i in insights:
-        pdf.multi_cell(0, 10, f"- {i}")
+    pdf.set_font("Arial", 'B', 12)
+    pdf.cell(0, 10, "Consultant Insights", ln=True)
+    pdf.set_font("Arial", '', 12)
+    pdf.multi_cell(0, 10, insights)
 
-    return pdf.output(dest="S").encode("latin-1")
+    file_path = f"{company}_HR_Report.pdf"
+    pdf.output(file_path)
+    return file_path
 
 # ---------------------------
-# Streamlit UI
+# Streamlit App
 # ---------------------------
 st.set_page_config(page_title="HR Due Diligence Dashboard", layout="wide")
 st.title("HR Due Diligence Dashboard")
@@ -153,19 +148,18 @@ st.title("HR Due Diligence Dashboard")
 company = st.text_input("Enter Company Name", value="").strip()
 
 if company:
-    data = COMPANY_DB.get(company)
-
-    if data:  # Use JSON data
+    if company in COMPANY_DATA:
+        data = COMPANY_DATA[company]
         summary = data["summary"]
         metrics = data["metrics"]
         pos_feedback = data["positive_feedback"]
         neg_feedback = data["negative_feedback"]
         highlights = data["highlights"]
-    else:  # Fallback to random
-        summary = generate_summary(company)
-        metrics = generate_metrics()
-        pos_feedback, neg_feedback = generate_feedback()
-        highlights = generate_highlights()
+    else:
+        summary = generate_random_summary(company)
+        metrics = generate_random_metrics()
+        pos_feedback, neg_feedback = generate_random_feedback()
+        highlights = generate_random_highlights()
 
     insights = generate_insights(summary, metrics, pos_feedback, neg_feedback)
 
@@ -173,45 +167,53 @@ if company:
     st.subheader("Executive Summary")
     st.write(summary)
 
-    # HR Metrics
+    # Key HR Metrics (Cards instead of table)
     st.subheader("Key HR Metrics")
-    metrics_df = pd.DataFrame(metrics.items(), columns=["Metric", "Value"])
-    st.dataframe(metrics_df, use_container_width=True)
+    col1, col2, col3 = st.columns(3)
 
-    # Feedback
-    st.subheader("Employee Feedback")
-    col1, col2 = st.columns(2)
     with col1:
-        st.markdown("**Positive Feedback**")
-        for f in pos_feedback:
-            st.markdown(f"- {f}")
+        st.metric("Average Tenure (years)", metrics["Average Tenure (years)"])
+        st.metric("Engagement Score (/5)", metrics["Engagement Score (/5)"])
+
     with col2:
-        st.markdown("**Negative Feedback**")
-        for f in neg_feedback:
-            st.markdown(f"- {f}")
+        st.metric("Annual Attrition Rate (%)", metrics["Annual Attrition Rate (%)"])
+        st.metric("Glassdoor Rating (/5)", metrics["Glassdoor Rating (/5)"])
+
+    with col3:
+        st.metric("Satisfaction %", f"{metrics['Satisfaction %']}%")
+
+    # Employee Feedback
+    st.subheader("Employee Feedback")
+    fb_col1, fb_col2 = st.columns(2)
+    fb_col1.markdown("**Positive Feedback**")
+    for f in pos_feedback:
+        fb_col1.markdown(f"- {f}")
+    fb_col2.markdown("**Negative Feedback**")
+    for f in neg_feedback:
+        fb_col2.markdown(f"- {f}")
 
     # Highlights
-    st.subheader("Key Highlights")
+    st.subheader("Key Insights / Highlights")
     for h in highlights:
         st.markdown(f"- {h}")
 
-    # Insights
-    st.subheader("Consultant Insights / Conclusion")
-    for i in insights:
-        st.markdown(f"- {i}")
+    # Consultant Insights
+    st.subheader("Consultant Insights")
+    st.write(insights)
 
-    # Culture Word Cloud (last)
-    st.subheader("Culture & Sentiment (Word Cloud)")
+    # Culture & Word Cloud
+    st.subheader("Culture & Sentiment")
     culture_keywords = generate_culture_keywords()
-    fig, ax = plt.subplots(figsize=(8, 4))
-    wc = WordCloud(width=800, height=400, background_color="white").generate_from_frequencies(culture_keywords)
+    fig, ax = plt.subplots(figsize=(10, 4))
+    wc = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(culture_keywords)
     ax.imshow(wc, interpolation="bilinear")
     ax.axis("off")
     st.pyplot(fig)
 
-    # Download PDF
-    pdf_bytes = create_pdf(company, summary, metrics, pos_feedback, neg_feedback, highlights, insights)
-    st.download_button("📥 Download Full Report (PDF)", data=pdf_bytes, file_name=f"{company}_HR_Report.pdf", mime="application/pdf")
+    # PDF Download
+    pdf_file = create_pdf(company, summary, metrics, pos_feedback, neg_feedback, highlights, insights)
+    with open(pdf_file, "rb") as f:
+        st.download_button("Download Report as PDF", f, file_name=pdf_file, mime="application/pdf")
 
 else:
     st.info("Please enter a company name to generate the HR report.")
