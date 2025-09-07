@@ -201,11 +201,50 @@ if company:
                   f"Highlights: {highlights}\n\nInsights: {insights}"
     st.download_button("Download Report as TXT", report_text, file_name=f"{company}_HR_Report.txt")
     
-    # Download PDF Report
+        # Download PDF Report
+    from fpdf import FPDF
+    import io
+
     pdf_btn = st.button("Download Report as PDF")
     if pdf_btn:
         pdf = FPDF()
         pdf.add_page()
         pdf.set_font("Arial", 'B', 16)
         pdf.cell(0, 10, f"HR Due Diligence Report: {company}", ln=True)
-        pdf.set_font("Arial
+        pdf.set_font("Arial", '', 12)
+        pdf.ln(5)
+        
+        # Summary
+        pdf.multi_cell(0, 8, f"Executive Summary:\n{summary}")
+        pdf.ln(5)
+        
+        # Metrics
+        pdf.multi_cell(0, 8, "Key HR Metrics:")
+        for k,v in metrics.items():
+            pdf.multi_cell(0, 8, f"{k}: {v}")
+        pdf.ln(3)
+        
+        # Feedback
+        pdf.multi_cell(0, 8, f"Positive Feedback: {', '.join(pos_feedback)}")
+        pdf.multi_cell(0, 8, f"Negative Feedback: {', '.join(neg_feedback)}")
+        pdf.ln(3)
+        
+        # Highlights
+        pdf.multi_cell(0, 8, f"Highlights: {', '.join(highlights)}")
+        pdf.ln(3)
+        
+        # Insights
+        pdf.multi_cell(0, 8, f"Insights & Recommendations: {', '.join(insights)}")
+        pdf.ln(3)
+        
+        # Simulated Review Snippets
+        pdf.multi_cell(0, 8, "Simulated Review Snippets:")
+        for r in fake_reviews:
+            pdf.multi_cell(0, 8, f"[{r['Sentiment']}] {r['Source']}: {r['Snippet']}")
+        
+        # Save PDF to BytesIO and provide download
+        pdf_buffer = io.BytesIO()
+        pdf.output(pdf_buffer)
+        pdf_buffer.seek(0)
+        st.download_button("Download PDF Report", pdf_buffer, file_name=f"{company}_HR_Report.pdf")
+
