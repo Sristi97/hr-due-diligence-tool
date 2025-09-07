@@ -1,36 +1,90 @@
 {
-  "news": {
-    "data": [
-      {"title": "Company continues to focus on innovation and employee development", "pubDate": "2025-09-07"},
-      {"title": "Leadership initiatives enhance organizational culture and collaboration", "pubDate": "2025-09-05"},
-      {"title": "Sustainability and corporate social responsibility programs gain momentum", "pubDate": "2025-09-03"}
-    ]
-  },
-  "google_snippets": [
-    "Strong culture of innovation and teamwork",
-    "Focus on employee engagement and growth",
-    "Inclusive and collaborative environment",
-    "Recognition and rewards for high performance"
-  ],
-  "reputation": {
-    "reviews": {
-      "message": "This is demo data showcasing typical employee reviews"
+  "Reliance": {
+    "news": {
+      "data": [
+        {
+          "title": "Reliance launches new sustainability initiative",
+          "description": "Reliance Industries announced a new plan to reduce carbon emissions across all plants by 2030."
+        },
+        {
+          "title": "Reliance acquires tech startup",
+          "description": "Reliance has acquired a small AI-driven analytics startup to enhance its digital capabilities."
+        }
+      ]
     },
-    "employee_satisfaction": {
-      "score": 4.2,
-      "comment": "Employees generally report high satisfaction with work-life balance and career development opportunities"
+    "google_snippets": {
+      "overview": "Reliance Industries Limited is an Indian multinational conglomerate holding company headquartered in Mumbai.",
+      "reviews": "Employees praise the fast-paced environment but note work-life balance can be challenging."
     },
-    "ratings": {
-      "overall": 4.0,
-      "management": 4.1,
-      "culture": 4.3,
-      "work_life_balance": 4.0
-    },
-    "Glassdoor": {
-      "message": "Demo data: actual Glassdoor reviews are not displayed here"
+    "reputation": {
+      "reviews": {
+        "message": "4.2/5 based on 1200 employee reviews"
+      },
+      "employee_satisfaction": {
+        "message": "Employees appreciate training programs and growth opportunities."
+      },
+      "ratings": {
+        "message": "4/5 Glassdoor, 4.1/5 Indeed"
+      },
+      "culture": {
+        "message": "Collaborative, high-performance culture with focus on innovation."
+      }
     }
   },
-  "culture_wordcloud": [
-    "Innovation", "Collaboration", "Diversity", "Growth", "Teamwork", "Engagement", "Recognition"
-  ]
+  "Infosys": {
+    "news": {
+      "data": [
+        {
+          "title": "Infosys partners with global cloud provider",
+          "description": "Infosys is expanding its cloud services through a strategic partnership with a leading provider."
+        }
+      ]
+    },
+    "google_snippets": {
+      "overview": "Infosys is a global leader in next-generation digital services and consulting.",
+      "reviews": "Work-life balance is often cited as positive, though some teams report high workload."
+    },
+    "reputation": {
+      "reviews": {
+        "message": "4.0/5 based on 900 employee reviews"
+      },
+      "employee_satisfaction": {
+        "message": "Employees highlight learning opportunities and supportive teams."
+      },
+      "ratings": {
+        "message": "3.9/5 Glassdoor, 4/5 Indeed"
+      },
+      "culture": {
+        "message": "Team-oriented culture focused on continuous learning and client success."
+      }
+    }
+  },
+  "Tata Motors": {
+    "news": {
+      "data": [
+        {
+          "title": "Tata Motors unveils new electric vehicle",
+          "description": "The company launched its latest electric vehicle aiming at sustainable mobility."
+        }
+      ]
+    },
+    "google_snippets": {
+      "overview": "Tata Motors Limited is an Indian multinational automotive manufacturing company.",
+      "reviews": "Employees value the brand and legacy, but report bureaucracy can slow decision-making."
+    },
+    "reputation": {
+      "reviews": {
+        "message": "3.8/5 based on 650 employee reviews"
+      },
+      "employee_satisfaction": {
+        "message": "Satisfaction is generally high with respect to compensation and benefits."
+      },
+      "ratings": {
+        "message": "3.7/5 Glassdoor, 3.8/5 Indeed"
+      },
+      "culture": {
+        "message": "Formal corporate culture with focus on engineering excellence and quality."
+      }
+    }
+  }
 }
