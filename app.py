@@ -40,6 +40,16 @@ def generate_dummy_culture():
     random.shuffle(keywords)
     return keywords[:7]
 
+# Function to generate a summary
+def generate_summary(company_name, metrics, feedback_list, culture_words):
+    summary = f"**HR Due Diligence Summary for {company_name}**\n\n"
+    summary += f"- Total reviews analyzed: {metrics.get('reviews_count', 'N/A')}\n"
+    summary += f"- Employee satisfaction: {metrics.get('employee_satisfaction', 'N/A')}%\n"
+    summary += f"- Overall rating: {metrics.get('overall_rating', 'N/A')}\n"
+    summary += f"- Key culture highlights: {', '.join(culture_words) if culture_words else 'N/A'}\n"
+    summary += f"- Sample employee feedback snippets: {', '.join(feedback_list[:3])}\n"
+    return summary
+
 # --- UI START ---
 st.title("HR Due Diligence Dashboard")
 st.markdown("Enter a company name to generate HR insights:")
@@ -60,8 +70,12 @@ if company_name:
         metrics = generate_dummy_metrics()
         culture_words = generate_dummy_culture()
     
+    # Summary
+    st.subheader("Summary")
+    st.markdown(generate_summary(company_name, metrics, feedback_list, culture_words))
+    
     # Summary Metrics
-    st.subheader(f"HR Metrics for {company_name}")
+    st.subheader("HR Metrics")
     col1, col2, col3 = st.columns(3)
     col1.metric("Number of Reviews", metrics.get("reviews_count", 0))
     col2.metric("Employee Satisfaction (%)", metrics.get("employee_satisfaction", 0))
