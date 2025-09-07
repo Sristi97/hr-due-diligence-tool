@@ -131,7 +131,7 @@ def create_pdf(company, summary, metrics, pos_feedback, neg_feedback, highlights
 
     pdf.ln(5)
     pdf.set_font("Arial", 'B', 12)
-    pdf.cell(0, 10, "Consultant Insights", ln=True)
+    pdf.cell(0, 10, "Insights", ln=True)
     pdf.set_font("Arial", '', 12)
     pdf.multi_cell(0, 10, insights)
 
@@ -197,8 +197,8 @@ if company:
     for h in highlights:
         st.markdown(f"- {h}")
 
-    # Consultant Insights
-    st.subheader("Consultant Insights")
+    # Insights
+    st.subheader("Insights")
     st.write(insights)
 
     # Culture & Word Cloud
@@ -217,3 +217,4 @@ if company:
 
 else:
     st.info("Please enter a company name to generate the HR report.")
+
