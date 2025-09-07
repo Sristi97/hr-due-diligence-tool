@@ -1,0 +1,171 @@
+Apple
+Microsoft
+Google
+Amazon
+Meta
+Tesla
+NVIDIA
+Samsung Electronics
+Intel
+IBM
+Oracle
+SAP
+Salesforce
+Adobe
+Cisco
+Sony
+Qualcomm
+Broadcom
+Dell Technologies
+HP
+Lenovo
+ASUS
+Acer
+Accenture
+Capgemini
+Cognizant
+Infosys
+Tata Consultancy Services
+Wipro
+HCLTech
+Tech Mahindra
+JPMorgan Chase
+Bank of America
+Citigroup
+Wells Fargo
+Goldman Sachs
+Morgan Stanley
+HSBC
+Barclays
+Deutsche Bank
+UBS
+BNP Paribas
+Credit Suisse
+Santander
+Standard Chartered
+Allianz
+AXA
+Prudential
+MetLife
+Walmart
+Costco
+Target
+Home Depot
+Lowe's
+Carrefour
+Tesco
+Kroger
+Coca-Cola
+PepsiCo
+Nestle
+Unilever
+Procter & Gamble
+Mondelez
+Kraft Heinz
+Starbucks
+McDonald's
+Yum! Brands
+Johnson & Johnson
+Pfizer
+Roche
+Novartis
+Merck
+GlaxoSmithKline
+AstraZeneca
+Sanofi
+Toyota Motor
+Volkswagen Group
+Mercedes-Benz Group
+BMW
+Honda
+Ford Motor Company
+General Motors
+Hyundai Motor
+Nissan
+Renault
+ExxonMobil
+Chevron
+BP
+Shell
+TotalEnergies
+Saudi Aramco
+PetroChina
+Sinopec
+Verizon
+AT&T
+Deutsche Telekom
+Vodafone
+Telefónica
+China Mobile
+UPS
+FedEx
+Deutsche Post DHL Group
+A.P. Moller - Maersk
+Disney
+Netflix
+Comcast
+Warner Bros. Discovery
+Paramount Global
+Alibaba Group
+JD.com
+eBay
+Shopify
+Rakuten
+PayPal
+Stripe
+Block
+Visa
+Mastercard
+American Express
+Booking Holdings
+Expedia Group
+Airbnb
+Uber
+Lyft
+Siemens
+General Electric
+Honeywell
+3M
+Boeing
+Lockheed Martin
+Caterpillar
+ABB
+Schneider Electric
+Inditex (Zara)
+H&M
+LVMH
+Kering
+Nike
+Adidas
+BlackRock
+Vanguard
+Berkshire Hathaway
+Reliance Industries
+Adani Group
+Mahindra & Mahindra
+Bajaj Auto
+HDFC Bank
+ICICI Bank
+State Bank of India
+Kotak Mahindra Bank
+Tencent
+Baidu
+ByteDance
+Huawei
+Xiaomi
+Meituan
+Zoom
+Atlassian
+ServiceNow
+Spotify
+Oracle Financial Services
+ING Group
+BNY Mellon
+NatWest Group
+SSE
+IKEA
+Daimler Truck
+Ferrari
+L'Oreal
+Estee Lauder
+Colgate-Palmolive
