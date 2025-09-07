@@ -259,5 +259,136 @@
     "positive_feedback": ["Creative freedom", "Collaborative environment", "Opportunities to learn", "Supportive leadership"],
     "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
     "highlights": ["Employees enjoy creative freedom.", "Collaboration is encouraged.", "Workload management could improve."]
+  },
+   "PayPal": {
+    "summary": "PayPal emphasizes innovation and employee development. Areas for improvement include workload and recognition. Employee sentiment is generally positive. Overall, PayPal provides growth opportunities and a supportive environment.",
+    "metrics": {
+      "Average Tenure (years)": 4.0,
+      "Annual Attrition Rate (%)": 11.5,
+      "Engagement Score (/5)": 4.4,
+      "Glassdoor Rating (/5)": 4.3,
+      "Satisfaction %": 84
+    },
+    "positive_feedback": ["Opportunities to learn", "Collaborative environment", "Supportive leadership", "Innovation encouraged"],
+    "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
+    "highlights": ["Employees enjoy learning opportunities.", "Collaboration is valued.", "Management is supportive."]
+  },
+  "Square": {
+    "summary": "Square emphasizes innovation, collaboration, and learning opportunities. Areas for improvement include workload and promotion delays. Employee sentiment is positive. Overall, Square provides growth in an engaging environment.",
+    "metrics": {
+      "Average Tenure (years)": 3.7,
+      "Annual Attrition Rate (%)": 13.0,
+      "Engagement Score (/5)": 4.3,
+      "Glassdoor Rating (/5)": 4.2,
+      "Satisfaction %": 82
+    },
+    "positive_feedback": ["Collaborative teams", "Innovation-driven culture", "Opportunities to learn", "Supportive leadership"],
+    "negative_feedback": ["High workload", "Promotion delays", "Limited recognition", "Internal politics"],
+    "highlights": ["Collaboration is emphasized.", "Innovation is valued.", "Workload can be challenging at times."]
+  },
+  "Zoom": {
+    "summary": "Zoom emphasizes fast-paced innovation and collaboration. Areas for improvement include workload management and recognition. Employee sentiment is generally positive. Overall, Zoom provides opportunities for growth and a dynamic work environment.",
+    "metrics": {
+      "Average Tenure (years)": 3.4,
+      "Annual Attrition Rate (%)": 14.0,
+      "Engagement Score (/5)": 4.2,
+      "Glassdoor Rating (/5)": 4.1,
+      "Satisfaction %": 80
+    },
+    "positive_feedback": ["Collaborative environment", "Innovation-driven projects", "Opportunities to learn", "Supportive leadership"],
+    "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
+    "highlights": ["Employees value collaboration.", "Innovation is encouraged.", "Workload can be challenging."]
+  },
+  "Slack": {
+    "summary": "Slack emphasizes collaboration, innovation, and employee engagement. Areas for improvement include workload and promotion speed. Employee sentiment is positive. Overall, Slack provides a supportive and engaging work environment.",
+    "metrics": {
+      "Average Tenure (years)": 3.6,
+      "Annual Attrition Rate (%)": 13.5,
+      "Engagement Score (/5)": 4.3,
+      "Glassdoor Rating (/5)": 4.2,
+      "Satisfaction %": 82
+    },
+    "positive_feedback": ["Collaborative environment", "Opportunities to learn", "Supportive leadership", "Innovation-driven culture"],
+    "negative_feedback": ["High workload", "Promotion delays", "Limited recognition", "Internal politics"],
+    "highlights": ["Employees appreciate collaboration.", "Innovation is encouraged.", "Workload management could improve."]
+  },
+  "Spotify": {
+    "summary": "Spotify emphasizes creativity, innovation, and collaboration. Areas for improvement include workload and recognition. Employee sentiment is positive. Overall, Spotify provides growth opportunities in a dynamic environment.",
+    "metrics": {
+      "Average Tenure (years)": 3.8,
+      "Annual Attrition Rate (%)": 12.5,
+      "Engagement Score (/5)": 4.4,
+      "Glassdoor Rating (/5)": 4.3,
+      "Satisfaction %": 84
+    },
+    "positive_feedback": ["Creative freedom", "Innovation-driven projects", "Collaborative teams", "Supportive leadership"],
+    "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
+    "highlights": ["Creativity is highly valued.", "Collaboration is encouraged.", "Workload can be a challenge."]
+  },
+  "Dropbox": {
+    "summary": "Dropbox emphasizes collaboration, learning, and innovation. Areas for improvement include workload and recognition. Employee sentiment is generally positive. Overall, Dropbox provides growth opportunities and a supportive environment.",
+    "metrics": {
+      "Average Tenure (years)": 4.0,
+      "Annual Attrition Rate (%)": 12.0,
+      "Engagement Score (/5)": 4.3,
+      "Glassdoor Rating (/5)": 4.2,
+      "Satisfaction %": 83
+    },
+    "positive_feedback": ["Collaborative teams", "Opportunities to learn", "Supportive leadership", "Innovation encouraged"],
+    "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
+    "highlights": ["Employees appreciate collaboration.", "Learning opportunities are valued.", "Workload can be high at times."]
+  },
+  "HP": {
+    "summary": "HP emphasizes structured processes and collaboration. Areas for improvement include workload and recognition. Employee sentiment is positive. Overall, HP provides stable growth opportunities with a supportive environment.",
+    "metrics": {
+      "Average Tenure (years)": 5.0,
+      "Annual Attrition Rate (%)": 11.0,
+      "Engagement Score (/5)": 4.2,
+      "Glassdoor Rating (/5)": 4.1,
+      "Satisfaction %": 82
+    },
+    "positive_feedback": ["Structured processes", "Collaborative environment", "Learning opportunities", "Supportive leadership"],
+    "negative_feedback": ["High workload", "Limited recognition", "Slow decision-making", "Internal politics"],
+    "highlights": ["Employees value structured work.", "Collaboration is emphasized.", "Workload can be high."]
+  },
+  "Dell": {
+    "summary": "Dell emphasizes collaboration, technical excellence, and learning. Areas for improvement include workload and recognition. Employee sentiment is generally positive. Overall, Dell provides steady growth opportunities.",
+    "metrics": {
+      "Average Tenure (years)": 4.8,
+      "Annual Attrition Rate (%)": 10.8,
+      "Engagement Score (/5)": 4.3,
+      "Glassdoor Rating (/5)": 4.2,
+      "Satisfaction %": 83
+    },
+    "positive_feedback": ["Technical excellence", "Collaborative teams", "Learning opportunities", "Supportive leadership"],
+    "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
+    "highlights": ["Employees value technical work.", "Collaboration is strong.", "Workload can be challenging."]
+  },
+  "Nvidia": {
+    "summary": "Nvidia emphasizes technical innovation and collaboration. Areas for improvement include workload and promotion delays. Employee sentiment is positive. Overall, Nvidia provides opportunities to work on cutting-edge technologies in a supportive environment.",
+    "metrics": {
+      "Average Tenure (years)": 4.2,
+      "Annual Attrition Rate (%)": 11.5,
+      "Engagement Score (/5)": 4.4,
+      "Glassdoor Rating (/5)": 4.3,
+      "Satisfaction %": 85
+    },
+    "positive_feedback": ["Technical innovation", "Collaborative teams", "Opportunities to learn", "Supportive leadership"],
+    "negative_feedback": ["High workload", "Promotion delays", "Limited recognition", "Internal politics"],
+    "highlights": ["Employees enjoy working on advanced technologies.", "Collaboration is encouraged.", "Workload can be high."]
+  },
+  "AMD": {
+    "summary": "AMD emphasizes technical excellence and innovation. Areas for improvement include workload and recognition. Employee sentiment is positive. Overall, AMD provides growth opportunities in a dynamic environment.",
+    "metrics": {
+      "Average Tenure (years)": 3.9,
+      "Annual Attrition Rate (%)": 12.0,
+      "Engagement Score (/5)": 4.3,
+      "Glassdoor Rating (/5)": 4.2,
+      "Satisfaction %": 82
+    },
+    "positive_feedback": ["Technical excellence", "Opportunities to learn", "Collaborative teams", "Innovation-driven environment"],
+    "negative_feedback": ["High workload", "Limited recognition", "Promotion delays", "Internal politics"],
+    "highlights": ["Employees value technical work.", "Collaboration is encouraged.", "Workload can be a challenge."]
   }
 }
+
