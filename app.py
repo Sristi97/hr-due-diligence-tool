@@ -34,18 +34,14 @@ if company:
     st.subheader("Executive Summary")
     st.write(summary)
 
-    # Key HR Metrics Table with conditional formatting
+    # ---------------------------
+    # Key HR Metrics as columns/cards
+    # ---------------------------
     st.subheader("Key HR Metrics")
-    metrics_df = pd.DataFrame(metrics.items(), columns=["Metric", "Value"])
-
-    def color_metrics(val):
-        if isinstance(val, (int, float)):
-            if val > 80 or val > 4.5:  # high values
-                return 'background-color: #b6fcb6'  # light green
-            elif val < 60 or val < 3.5:  # low values
-                return 'background-color: #ffb3b3'  # light red
-        return ''
-    st.dataframe(metrics_df.style.applymap(color_metrics, subset=["Value"]), height=200)
+    metric_cols = st.columns(len(metrics))
+    for i, (metric, value) in enumerate(metrics.items()):
+        with metric_cols[i]:
+            st.metric(label=metric, value=value)
 
     # Employee Feedback
     st.subheader("Employee Feedback")
