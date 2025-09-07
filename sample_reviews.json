@@ -1,11 +1,17 @@
-company_name = st.text_input("Enter company name:")
-
-if company_name:
-    st.subheader("Wikipedia Overview")
-    wiki_summary = fetch_wiki_summary(company_name)
-    st.write(wiki_summary)
-    
-    st.subheader("Recent News Headlines")
-    news_headlines = fetch_news(company_name)
-    for idx, headline in enumerate(news_headlines, 1):
-        st.write(f"{idx}. {headline}")
+[
+  {
+    "review": "Great place to work with learning opportunities",
+    "pros": "Supportive team, good career growth",
+    "cons": "Long working hours"
+  },
+  {
+    "review": "Company has strong market presence",
+    "pros": "Brand value, challenging projects",
+    "cons": "Work-life balance could be better"
+  },
+  {
+    "review": "Good salary but stressful environment",
+    "pros": "Compensation is above average",
+    "cons": "High pressure and strict deadlines"
+  }
+]
