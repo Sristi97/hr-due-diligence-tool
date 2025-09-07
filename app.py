@@ -3,16 +3,16 @@ import random
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import pandas as pd
+import altair as alt
 
 # ---------------------------
 # Dummy Data Generators
 # ---------------------------
 
 def generate_summary(company):
-    # Determine sentiment score to tie metrics & summary
     sentiment_score = random.random()
     
-    # Tailor strengths based on company name
+    # Tailor strengths/weaknesses/culture based on company type
     if "tech" in company.lower():
         strengths = ["innovation-driven projects", "continuous learning", "modern technology stack", "collaborative teams"]
         weaknesses = ["rapid changes can cause confusion", "tight deadlines", "long hours during sprints"]
@@ -34,7 +34,6 @@ def generate_summary(company):
         f"highlighting both achievements and challenges. Overall, {company} presents an environment "
         f"where employees experience growth opportunities while facing some operational challenges."
     )
-    
     return summary, sentiment_score
 
 def generate_metrics(sentiment_score):
@@ -91,6 +90,22 @@ def generate_highlights(sentiment_score):
     ]
     return random.sample(highlights, k=4)
 
+def generate_fake_reviews(company):
+    # Simulate “scraping” reviews from multiple sites
+    sources = ["Glassdoor", "Indeed", "LinkedIn"]
+    reviews = []
+    sample_text = [
+        f"{company} has a very supportive management and encourages learning.",
+        f"{company} projects are challenging but rewarding.",
+        f"Work-life balance at {company} is appreciated by employees.",
+        f"Decision-making can be slow in some teams at {company}.",
+        f"{company} has a collaborative and innovative culture.",
+        f"Internal politics and promotion delays are sometimes reported."
+    ]
+    for source in sources:
+        reviews.append({"Source": source, "Snippet": random.choice(sample_text)})
+    return reviews
+
 # ---------------------------
 # Streamlit Layout
 # ---------------------------
@@ -107,17 +122,18 @@ if company:
     pos_feedback, neg_feedback = generate_feedback(sentiment_score)
     culture_keywords = generate_culture_keywords(sentiment_score)
     highlights = generate_highlights(sentiment_score)
+    fake_reviews = generate_fake_reviews(company)
     
     # Summary
     st.subheader("Executive Summary")
     st.write(summary)
     
-    # Key Metrics Table
+    # Key Metrics Table (styled)
     st.subheader("Key HR Metrics")
     metrics_df = pd.DataFrame(metrics.items(), columns=["Metric", "Value"])
-    st.table(metrics_df)
+    st.dataframe(metrics_df.style.format({"Value": "{:.1f}" if isinstance(metrics_df["Value"][0], float) else "{}"}), height=200)
     
-    # Employee Feedback
+    # Employee Feedback Table & Chart
     st.subheader("Employee Feedback")
     fb_col1, fb_col2 = st.columns(2)
     fb_col1.markdown("**Positive Feedback**")
@@ -127,13 +143,19 @@ if company:
     for f in neg_feedback:
         fb_col2.markdown(f"- {f}")
     
-    # Feedback Bar Chart
-    st.subheader("Feedback Overview")
-    feedback_counts = pd.DataFrame({
-        "Type": ["Positive", "Negative"],
+    # Feedback Overview Chart using Altair
+    feedback_df = pd.DataFrame({
+        "Feedback Type": ["Positive", "Negative"],
         "Count": [len(pos_feedback), len(neg_feedback)]
     })
-    st.bar_chart(feedback_counts.set_index("Type"))
+    st.subheader("Feedback Overview")
+    chart = alt.Chart(feedback_df).mark_bar().encode(
+        x=alt.X('Feedback Type', sort=None),
+        y='Count',
+        color='Feedback Type',
+        tooltip=['Feedback Type','Count']
+    ).properties(width=400, height=250)
+    st.altair_chart(chart)
     
     # Highlights
     st.subheader("Key Insights / Highlights")
@@ -147,6 +169,11 @@ if company:
     ax.imshow(wc, interpolation="bilinear")
     ax.axis("off")
     st.pyplot(fig)
+    
+    # Fake Review Snippets
+    st.subheader("Simulated Review Snippets (from multiple sources)")
+    review_df = pd.DataFrame(fake_reviews)
+    st.dataframe(review_df, height=200)
     
     # Downloadable Report
     st.subheader("Download Report")
