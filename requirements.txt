@@ -3,4 +3,3 @@ requests
 textblob
 wordcloud
 matplotlib
-tweepy
