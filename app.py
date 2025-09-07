@@ -41,4 +41,15 @@ def generate_wordcloud(text):
     return wordcloud
 
 def analyze_sentiment(texts):
-    """Simple sentiment polarity analysis
+    """Simple sentiment polarity analysis using TextBlob"""
+    if not texts:
+        return "Not enough data"
+    polarity = sum(TextBlob(t).sentiment.polarity for t in texts) / len(texts)
+    if polarity > 0.1:
+        return "Overall Positive Sentiment 😊"
+    elif polarity < -0.1:
+        return "Overall Negative Sentiment 😟"
+    else:
+        return "Mixed/Neutral Sentiment 😐"
+
+def create_pdf(com_
