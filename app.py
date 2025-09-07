@@ -1,73 +1,57 @@
-import json
 import streamlit as st
+import wikipedia
+import requests
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-import nltk
+from io import BytesIO
 
-# Download NLTK data if not already
-nltk.download('vader_lexicon')
+# NewsAPI key
+NEWS_API_KEY = "YOUR_NEWSAPI_KEY"  # Replace with your key
 
-st.set_page_config(page_title="HR Due Diligence Tool", layout="wide")
-st.title("HR Due Diligence Tool – Prototype")
+# Function to fetch Wikipedia summary
+def fetch_wiki_summary(company_name):
+    try:
+        summary = wikipedia.summary(company_name, sentences=5)
+        return summary
+    except wikipedia.exceptions.DisambiguationError as e:
+        return wikipedia.summary(e.options[0], sentences=5)
+    except:
+        return "No Wikipedia data found."
 
-# Load sample reviews
-with open("sample_reviews.json") as f:
-    data = json.load(f)
+# Function to fetch recent news headlines
+def fetch_news(company_name):
+    url = f"https://newsapi.org/v2/everything?q={company_name}&sortBy=relevancy&apiKey={NEWS_API_KEY}&pageSize=5"
+    response = requests.get(url)
+    data = response.json()
+    headlines = [article['title'] for article in data.get('articles', [])]
+    return headlines if headlines else ["No news found"]
 
-# Input company name
-company = st.text_input("Enter Company Name (e.g., TCS, Infosys, Wipro)")
+# Streamlit UI
+st.title("HR Due Diligence Tool")
 
-if company:
-    reviews = data.get(company)
-    if not reviews:
-        st.warning("No data available for this company.")
-    else:
-        st.subheader("Reviews")
-        for i, review in enumerate(reviews, 1):
-            st.write(f"{i}. {review}")
+company_name = st.text_input("Enter company name:")
 
-        # Sentiment Analysis
-        sid = SentimentIntensityAnalyzer()
-        scores = [sid.polarity_scores(r)['compound'] for r in reviews]
-        avg_score = sum(scores)/len(scores)
+if company_name:
+    st.subheader("Wikipedia Overview")
+    wiki_summary = fetch_wiki_summary(company_name)
+    st.write(wiki_summary)
 
-        if avg_score >= 0.05:
-            verdict = "Overall Positive"
-        elif avg_score <= -0.05:
-            verdict = "Overall Negative"
-        else:
-            verdict = "Neutral / Mixed"
+    st.subheader("Recent News Headlines")
+    news_headlines = fetch_news(company_name)
+    for idx, headline in enumerate(news_headlines, 1):
+        st.write(f"{idx}. {headline}")
 
-        st.subheader("Sentiment Analysis")
-        st.write(f"Average Sentiment Score: {avg_score:.2f}")
-        st.write(f"Verdict: {verdict}")
+    # Combine text for word cloud & sentiment
+    combined_text = wiki_summary + " " + " ".join(news_headlines)
 
-        # Word Cloud
-        st.subheader("Key Themes (Word Cloud)")
-        text = " ".join(reviews)
-        wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
-        plt.figure(figsize=(10,5))
-        plt.imshow(wordcloud, interpolation='bilinear')
-        plt.axis('off')
-        st.pyplot(plt)
+    # WordCloud
+    wordcloud = WordCloud(width=800, height=400, background_color='white').generate(combined_text)
+    plt.figure(figsize=(10,5))
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis('off')
+    st.pyplot(plt)
 
-        # Top Keywords
-        st.subheader("Top Keywords")
-        words = text.split()
-        freq = {}
-        for w in words:
-            w = w.lower().strip(".,")
-            freq[w] = freq.get(w,0)+1
-        sorted_words = sorted(freq.items(), key=lambda x: x[1], reverse=True)[:10]
-        for word, count in sorted_words:
-            st.write(f"{word}: {count}")
-
-        # Downloadable report
-        st.subheader("Download Report")
-        report_text = f"Company: {company}\n\nReviews:\n"
-        report_text += "\n".join([f"{i}. {r}" for i,r in enumerate(reviews,1)])
-        report_text += f"\n\nSentiment Score: {avg_score:.2f}\nVerdict: {verdict}\n\nTop Keywords:\n"
-        report_text += "\n".join([f"{w}: {c}" for w,c in sorted_words])
-
-        st.download_button("Download TXT Report", report_text, file_name=f"{company}_HR_Report.txt")
+    # Optional: download report
+    from io import BytesIO
+    report_text = f"Company: {company_name}\n\nWikipedia Summary:\n{wiki_summary}\n\nNews Headlines:\n" + "\n".join(news_headlines)
+    st.download_button("Download Report", report_text, file_name=f"{company_name}_report.txt")
